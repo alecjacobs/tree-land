@@ -7,6 +7,9 @@ Schemas.Story = new SimpleSchema
     max: 140
   parent:
     type: String
+  userId:
+    type: String
+
 
 Stories.attachSchema(Schemas.Story)
 
@@ -19,6 +22,9 @@ sizeClass = (depthLevel) ->
   "col-xs-#{12 - depthLevel} #{offsetClass}"
 
 if Meteor.isClient
+  Accounts.ui.config
+    passwordSignupFields: "USERNAME_ONLY"
+
   Template.body.helpers
     tasks: [
       { text: "Task here", sizeClass: sizeClass(0) }
