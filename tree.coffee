@@ -1,3 +1,15 @@
+Stories = new Mongo.Collection("stories")
+Schemas = {}
+Schemas.Story = new SimpleSchema
+  title:
+    type: String
+    label: "title"
+    max: 140
+  parent:
+    type: String
+
+Stories.attachSchema(Schemas.Story)
+
 sizeClass = (depthLevel) ->
   if depthLevel == 0
     offsetClass = ""
