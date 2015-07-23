@@ -1,8 +1,33 @@
 <head>
-  <title>Todo List</title>
+  <title>TreeLand</title>
 </head>
 
 <body>
+  {{> navigation}}
+  <div class="container">
+    <header>
+      <h1>Hi, {{currentUser.username}}</h1>
+    </header>
+
+    {{> application}}
+  </div>
+</body>
+
+<template name="application">
+  <div class="container">
+    {{#if noStories}}
+      <p>Create your root node...</p>
+      {{> insertStoryForm}}
+    {{/if}}
+    {{#each stories}}
+      <div class="row">
+        {{> story}}
+      </div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="navigation">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -11,23 +36,25 @@
       </div>
     </div>
   </nav>
-  <div class="container">
-    <header>
-      <h1>Todo List</h1>
-    </header>
+</template>
 
-    <div class="container">
-      {{#each tasks}}
-        <div class="row">
-          {{> task}}
-        </div>
-      {{/each}}
+<template name="story">
+  <div class="story {{sizeClass depth}}">
+    <h5>{{title}}</h5>
+    <a href="#" class="delete">X</a>
+    <div class="clearfix"></div>
+    {{> insertStoryForm parentId=_id}}
+  </div>
+</template>
+
+
+<template name="insertStoryForm">
+  {{#autoForm collection="Stories" id="insertStoryForm" type="insert" class="form-inline"}}
+    <div class="form-group">
+      {{> afQuickField name='title' label=false class="form-control"}}
     </div>
-  </div>
-</body>
-
-<template name="task">
-  <div class="task {{sizeClass}}">
-    <h3>{{text}}</h3>
-  </div>
+    {{> afQuickField name='editing' label=false class="form-control" type="hidden" value=true}}
+    {{> afQuickField name='depth' label=false class="form-control" type="hidden" value=1}}
+    {{> afQuickField name='parentId' label=false class="form-control" type="hidden" value=parentId}}
+  {{/autoForm}}
 </template>
