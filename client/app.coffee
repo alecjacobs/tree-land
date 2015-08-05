@@ -31,5 +31,9 @@ storyFormHooks =
     after:
       update: (doc) ->
         Stories.update(@docId, {$set: {editing: (! @currentDoc.editing)}})
+  insertStoryForm:
+    after:
+      insert: (doc) ->
+        Stories.update(@docId, {$set: {editing: false}})
 
 AutoForm.hooks(storyFormHooks)
