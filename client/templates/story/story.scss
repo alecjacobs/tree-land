@@ -1,0 +1,19 @@
+.story {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: lightgrey;
+
+  .title {
+    display: inline-block;
+    height: 44px;
+  }
+
+  .btn-group {
+    float: right;
+  }
+}
+
+
+.btn.story-submit-button {
+  vertical-align: top;
+}

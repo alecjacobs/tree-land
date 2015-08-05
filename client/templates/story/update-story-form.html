@@ -1,0 +1,11 @@
+<template name="updateStoryForm">
+  {{#autoForm collection="Stories" id="updateStoryForm" doc=editingStory type="update" class="form-inline title"}}
+    <div class="form-group">
+      {{> afQuickField name='title' label=false class="form-control title-edit"}}
+    </div>
+    {{> afQuickField name='editing' label=false class="form-control" type="hidden" value=true}}
+    {{> afQuickField name='depth' label=false class="form-control" type="hidden" value=0}}
+    {{> afQuickField name='position' label=false class="form-control" type="hidden" value=0}}
+    {{> afQuickField name='parentId' label=false class="form-control" type="hidden" value=parentId}}
+  {{/autoForm}}
+</template>
