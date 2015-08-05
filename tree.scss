@@ -1,9 +1,18 @@
 
 .story {
+  padding-top: 5px;
+  padding-bottom: 5px;
   background-color: lightgrey;
-  // height: 50px;
   border-top: 1px solid grey;
   border-left: 1px solid grey;
+
+  .title {
+    display: inline-block;
+  }
+
+  .btn-group {
+    float: right;
+  }
 }
 
 

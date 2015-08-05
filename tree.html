@@ -4,26 +4,24 @@
 
 <body>
   {{> navigation}}
-  <div class="container">
-    <header>
-      <h1>Hi, {{currentUser.username}}</h1>
-    </header>
-
-    {{> application}}
-  </div>
+  <header>
+    <h1>Hi, {{currentUser.username}}</h1>
+  </header>
+  {{> application}}
 </body>
 
 <template name="application">
-  <div class="container">
+  <div class="container-fluid">
     {{#if noStories}}
       <p>Create your root node...</p>
       {{> insertStoryForm}}
     {{/if}}
-    {{#each stories}}
-      <div class="row">
+
+    <div class="row">
+      {{#each stories}}
         {{> story}}
-      </div>
-    {{/each}}
+      {{/each}}
+    </div>
   </div>
 </template>
 
@@ -40,21 +38,50 @@
 
 <template name="story">
   <div class="story {{sizeClass depth}}">
-    <h5>{{title}}</h5>
-    <a href="#" class="delete">X</a>
+    {{#if editing}}
+      {{> updateStoryForm editingStory=this}}
+    {{else}}
+      <p class="title">{{title}}</p>
+    {{/if}}
+
+    <div class="btn-group" role="group">
+      <button type="button" class="complete btn btn-default">
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+
+      <button type="button" class="edit btn btn-default">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+
+      <button type="button" class="delete btn btn-default">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </div>
     <div class="clearfix"></div>
-    {{> insertStoryForm parentId=_id}}
   </div>
 </template>
 
 
 <template name="insertStoryForm">
-  {{#autoForm collection="Stories" id="insertStoryForm" type="insert" class="form-inline"}}
+  {{#autoForm collection="Stories" id="insertStoryForm" type="insert" class="form-inline title"}}
     <div class="form-group">
       {{> afQuickField name='title' label=false class="form-control"}}
     </div>
     {{> afQuickField name='editing' label=false class="form-control" type="hidden" value=true}}
-    {{> afQuickField name='depth' label=false class="form-control" type="hidden" value=1}}
+    {{> afQuickField name='depth' label=false class="form-control" type="hidden" value=0}}
+    {{> afQuickField name='position' label=false class="form-control" type="hidden" value=0}}
+    {{> afQuickField name='parentId' label=false class="form-control" type="hidden" value=parentId}}
+  {{/autoForm}}
+</template>
+
+<template name="updateStoryForm">
+  {{#autoForm collection="Stories" id="updateStoryForm" doc=editingStory type="update" class="form-inline title"}}
+    <div class="form-group">
+      {{> afQuickField name='title' label=false class="form-control title-edit"}}
+    </div>
+    {{> afQuickField name='editing' label=false class="form-control" type="hidden" value=true}}
+    {{> afQuickField name='depth' label=false class="form-control" type="hidden" value=0}}
+    {{> afQuickField name='position' label=false class="form-control" type="hidden" value=0}}
     {{> afQuickField name='parentId' label=false class="form-control" type="hidden" value=parentId}}
   {{/autoForm}}
 </template>
