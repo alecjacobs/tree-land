@@ -8,7 +8,11 @@
     {{> application}}
   {{else}}
     <div class="container-fluid">
-      <h3>Sorry! The connection is down. Trying to connect now ({{meteorStatus.retryCount}} attempts)</h3>
+      <h3>
+        Sorry! The connection is down.
+        Trying to connect now
+        ({{meteorStatus.retryCount}} attempts)
+      </h3>
     </div>
   {{/if}}
 </body>
