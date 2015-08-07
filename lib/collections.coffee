@@ -1,8 +1,8 @@
 root = window ? global
 
 root.Stories = new Mongo.Collection("stories")
+root.Schemas = {}
 
-Schemas = {}
 Schemas.Stories = new SimpleSchema
   title:
     type: String
