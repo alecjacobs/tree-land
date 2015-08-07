@@ -1,18 +1,26 @@
 .story {
   padding-top: 5px;
   padding-bottom: 5px;
-  background-color: lightgrey;
+  border: 1px solid lightgrey;
+  border-top: 0;
+  border-right: 0;
+  cursor: pointer;
 
-  .title {
+  .title, .title-edit {
     display: inline-block;
-    height: 34px;
+    float: left;
   }
 
   .btn-group {
     float: right;
   }
-}
 
+  input {
+    outline: none;
+    border: 0;
+    padding: 0;
+  }
+}
 
 .btn.story-submit-button {
   vertical-align: top;

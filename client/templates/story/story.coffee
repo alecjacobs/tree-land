@@ -1,12 +1,11 @@
 Template.story.events
-  "click .edit": (e, tmpl) ->
-    Stories.update @_id, {$set: {editing: (! @editing)}}, ->
-      $(".title-edit").focus()
-  "click .delete": (e, tmpl) ->
-    Stories.remove(@_id)
-  "click .title": (e, tmpl) ->
+  "click .story": (e, tmpl) ->
     Stories.update @_id, {$set: {editing: true}}, ->
-      $(".title-edit").focus()
+      $(tmpl.find(".title-edit")).focus().select()
+  "blur .story": (e, tmpl) ->
+    formData = serializeForm(tmpl.find("#storyUpdateForm"))
+    formData.editing = false
+    Stories.update(@_id, {$set: formData})
 
 Template.story.helpers
   sizeClass: (depthLevel) ->
@@ -16,15 +15,3 @@ Template.story.helpers
       offsetClass = "col-xs-offset-#{depthLevel}"
 
     "col-xs-#{12 - depthLevel} #{offsetClass}"
-
-storyFormHooks =
-  updateStoryForm:
-    after:
-      update: (doc) ->
-        Stories.update(@docId, {$set: {editing: (! @currentDoc.editing)}})
-  insertStoryForm:
-    after:
-      insert: (doc) ->
-        Stories.update(@docId, {$set: {editing: false}})
-
-AutoForm.hooks(storyFormHooks)

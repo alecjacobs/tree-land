@@ -1,23 +1,19 @@
 <template name="story">
   <div class="story {{sizeClass depth}}">
     {{#if editing}}
-      {{> updateStoryForm editingStory=this}}
+      {{> storyUpdateForm editingStory=this}}
     {{else}}
       <p class="title">{{title}}</p>
     {{/if}}
 
     <div class="btn-group" role="group">
-      <button type="button" class="complete btn btn-default">
-        <span class="glyphicon glyphicon-ok"></span>
-      </button>
+      {{> storyButton story=this class="complete" glyph="ok"}}
+      {{> storyButton story=this class="dec-depth" glyph="chevron-left"}}
+      {{> storyButton story=this class="inc-depth" glyph="chevron-right"}}
+      {{> storyButton story=this class="add" glyph="plus"}}
 
-      <button type="button" class="edit btn btn-default">
-        <span class="glyphicon glyphicon-pencil"></span>
-      </button>
 
-      <button type="button" class="delete btn btn-default">
-        <span class="glyphicon glyphicon-remove"></span>
-      </button>
+      {{> storyButton story=this class="delete" glyph="remove"}}
     </div>
     <div class="clearfix"></div>
   </div>

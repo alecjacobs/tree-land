@@ -1,9 +1,0 @@
-<template name="insertStoryForm">
-  {{#autoForm collection="Stories" id="insertStoryForm" type="insert" class="title"}}
-    {{> afQuickField name='title' label=false}}
-    {{> afQuickField name='editing' label=false type="hidden" value=true}}
-    {{> afQuickField name='depth' label=false type="hidden" value=0}}
-    {{> afQuickField name='position' label=false type="hidden" value=0}}
-    {{> afQuickField name='parentId' label=false type="hidden" value=parentId}}
-  {{/autoForm}}
-</template>
