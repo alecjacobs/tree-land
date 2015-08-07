@@ -15,8 +15,12 @@ Template.application.helpers
   stories: ->
     Stories.find({})
 
+Template.body.helpers
+  meteorStatus: ->
+    Meteor.status()
+
 Template.application.onCreated ->
   @subscribe "stories", ->
     Tracker.autorun ->
-      if Stories.find({}).count() == 0
+      if Meteor.status().connected && (Stories.find({}).count() == 0)
         Stories.create({title: "life"})

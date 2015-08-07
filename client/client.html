@@ -1,0 +1,24 @@
+<head>
+  <title>TreeLand</title>
+</head>
+
+<body>
+  {{> navigation}}
+  {{#if meteorStatus.connected}}
+    {{> application}}
+  {{else}}
+    <div class="container-fluid">
+      <h3>Sorry! The connection is down. Trying to connect now ({{meteorStatus.retryCount}} attempts)</h3>
+    </div>
+  {{/if}}
+</body>
+
+<template name="application">
+  <div class="container-fluid">
+    <div class="row">
+      {{#each stories}}
+        {{> story}}
+      {{/each}}
+    </div>
+  </div>
+</template>

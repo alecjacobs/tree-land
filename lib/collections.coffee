@@ -24,7 +24,6 @@ Schemas.Stories = new SimpleSchema
 
 Stories.attachSchema(Schemas.Stories)
 
-
 Stories.defaults =
   title: ""
   depth: 0
@@ -35,5 +34,4 @@ Stories.defaults =
 
 Stories.create = (storyData) ->
   resultDoc = _.extend(@defaults, storyData)
-
   Stories.insert(resultDoc)
