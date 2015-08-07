@@ -15,9 +15,8 @@ Template.application.helpers
   stories: ->
     Stories.find({})
 
-Template.body.helpers
-  meteorStatus: ->
-    Meteor.status()
+Template.registerHelper "meteorStatus", ->
+  Meteor.status()
 
 Template.application.onCreated ->
   @subscribe "stories", ->

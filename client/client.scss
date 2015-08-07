@@ -3,15 +3,14 @@
 }
 
 .connection-indicator {
+  padding: 0 10px;
+
   &.connected {
     background-color: #65ff70;
-    color: white;
-    padding: 0 10px;
   }
 
   &.offline {
     background-color: #FF6565;
     color: white;
-    padding: 0 10px;
   }
 }
