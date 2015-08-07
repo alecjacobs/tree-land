@@ -15,3 +15,6 @@ Template.story.helpers
       offsetClass = "col-xs-offset-#{depthLevel}"
 
     "col-xs-#{12 - depthLevel} #{offsetClass}"
+  state: ->
+    if @editing
+      "editing"

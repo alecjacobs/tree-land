@@ -3,7 +3,7 @@
   padding-bottom: 5px;
   border: 1px solid lightgrey;
   border-top: 0;
-  border-right: 0;
+  border-right: 5px solid white;
   cursor: pointer;
 
   .title, .title-edit {
@@ -20,6 +20,13 @@
     outline: none;
     border: 0;
     padding: 0;
+  }
+
+  &.editing {
+    .state-indicator {
+      background-color: lightgrey;
+      height: 30px;
+    }
   }
 }
 

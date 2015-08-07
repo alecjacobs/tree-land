@@ -1,7 +1,9 @@
 <template name="story">
-  <div class="story {{sizeClass depth}}">
+  <div class="story {{sizeClass depth}} {{state}}">
     <div class="row">
-      <div class="col-sm-9">
+      <div class="col-sm-1 state-indicator">
+      </div>
+      <div class="col-sm-8">
         {{#if editing}}
           {{> storyUpdateForm editingStory=this}}
         {{else}}
