@@ -8,7 +8,8 @@ Template.storyButton.events
       title: ""
       editing: true
       position: (@story.position + 1)
-      depth: @story.depth
+      depth: (@story.depth + 1)
+      parentId: @story._id
   "click .inc-depth": (e, tmpl) ->
     e.stopPropagation()
     Stories.update(@story._id, {$set: {depth: (@story.depth + 1)}})

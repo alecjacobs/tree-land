@@ -12,8 +12,8 @@ Accounts.ui.config
   passwordSignupFields: "USERNAME_ONLY"
 
 Template.application.helpers
-  stories: ->
-    Stories.find({})
+  topLevelStories: ->
+    Stories.find({depth: 0})
 
 Template.registerHelper "meteorStatus", ->
   Meteor.status()

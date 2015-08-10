@@ -18,3 +18,5 @@ Template.story.helpers
   state: ->
     if @editing
       "editing"
+  subStories: ->
+    Stories.find({parentId: @_id})
