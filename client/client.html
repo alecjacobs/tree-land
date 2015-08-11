@@ -4,25 +4,26 @@
 
 <body>
   {{> navigation}}
+  
   {{#if meteorStatus.connected}}
     {{> application}}
   {{else}}
-    <div class="container-fluid">
-      <h3>
-        Sorry! The connection is down.
-        Trying to connect now
-        ({{meteorStatus.retryCount}} attempts)
-      </h3>
-    </div>
+    {{> offline}}
   {{/if}}
 </body>
 
 <template name="application">
+  {{#each stories}}
+    {{> story}}
+  {{/each}}
+</template>
+
+<template name="offline">
   <div class="container-fluid">
-    <div class="row">
-      {{#each stories}}
-        {{> story}}
-      {{/each}}
-    </div>
+    <h3>
+      Sorry! The connection is down.
+      Trying to connect now
+      ({{meteorStatus.retryCount}} attempts)
+    </h3>
   </div>
 </template>

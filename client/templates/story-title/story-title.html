@@ -1,0 +1,15 @@
+<template name="storyTitle">
+  {{#if editing}}
+    <form id="storyUpdateForm">
+      <input
+        name="title"
+        type="text"
+        class="title-edit"
+        placeholder="title"
+        value={{title}}
+        maxlength={{titleMaxChars}}>
+    </form>
+  {{else}}
+    <p class="title">{{title}}</p>
+  {{/if}}
+</template>

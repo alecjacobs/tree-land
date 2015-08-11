@@ -1,10 +1,10 @@
-Template.storyUpdateForm.events
+Template.storyTitle.events
   "submit #storyUpdateForm": (e, tmpl) ->
     e.preventDefault()
     formData = serializeForm(e.currentTarget)
     formData.editing = false
-    Stories.update(@editingStory._id, {$set: formData})
+    Stories.update(@_id, {$set: formData})
 
-Template.storyUpdateForm.helpers
+Template.storyTitle.helpers
   titleMaxChars: ->
     Schemas.Stories._schema.title.max

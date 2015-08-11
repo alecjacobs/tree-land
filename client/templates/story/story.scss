@@ -1,15 +1,22 @@
 .story {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  float: right;
+  
   border: 1px solid lightgrey;
   border-top: 0;
   border-right: 0;
+  
   cursor: pointer;
+  
+  .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .title, .title-edit {
     display: inline-block;
     float: left;
-    width: 100%;
+    width: 80%;
   }
 
   .btn-group {
@@ -23,7 +30,11 @@
   }
 
   .state-indicator {
-    height: 30px;
+    height: 80px;
+    float: left;
+    display: inline-box;
+    width: 10px;
+    margin-right: 1px;
 
     &.editing {
       background-color: lightgrey;
