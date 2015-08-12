@@ -12,6 +12,11 @@ Template.story.helpers
   state: ->
     if @editing
       "editing"
+    else if @selected
+      "selected"
+    else
+      ""
+      
   widthPercentage: (depthLevel) ->
     maximumDepth = 24
     
@@ -21,3 +26,9 @@ Template.story.helpers
       20
     else
       100 - (80 * (depthLevel / maximumDepth))
+
+Template.story.onCreated ->
+  #Mousetrap.bind "esc", ->
+    #console.log "esc key pressed"
+    #Stories.update({editing: true}, {editing: false}, {multi: true})
+    

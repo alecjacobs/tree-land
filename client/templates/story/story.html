@@ -2,27 +2,8 @@
   <div class="story" style="width: {{widthPercentage depth}}%;">
     <div class="state-indicator {{state}}"></div>
     {{> storyTitle this}}
-    <div class="btn-group" role="group">
-      {{> storyButton
-        story=this
-        class="dec-depth"
-        glyph="chevron-left"}}
-        
-      {{> storyButton
-        story=this
-        class="inc-depth"
-        glyph="chevron-right"}}
-        
-      {{> storyButton
-        story=this
-        class="add"
-        glyph="plus"}}
-        
-      {{> storyButton
-        story=this
-        class="delete"
-        glyph="remove"}}
-    </div>
+    {{> buttonGroup this}}
   </div>
+  
   <div class="clearfix"></div>
 </template>

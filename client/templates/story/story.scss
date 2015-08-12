@@ -37,6 +37,10 @@
     margin-right: 1px;
 
     &.editing {
+      background-color: black;
+    }
+    
+    &.selected {
       background-color: lightgrey;
     }
   }
