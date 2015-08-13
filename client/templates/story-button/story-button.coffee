@@ -13,6 +13,7 @@ Template.storyButton.events
       editing: true
       position: (@position + 1)
       depth: @depth
+      parentId: @_id
   "click .delete": (e, tmpl) ->
     e.stopPropagation()
     Stories.remove(@_id)

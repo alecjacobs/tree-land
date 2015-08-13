@@ -1,9 +1,11 @@
 <template name="story">
-  <div class="story" style="width: {{widthPercentage depth}}%;">
-    <div class="state-indicator {{state}}"></div>
+  <div class="story">
+    <div class="state-indicator {{state}}">{{depth}}</div>
     {{> storyTitle this}}
     {{> buttonGroup this}}
   </div>
   
   <div class="clearfix"></div>
+  
+  {{> storiesList parentId=_id}}
 </template>

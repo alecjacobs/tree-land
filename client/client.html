@@ -13,9 +13,7 @@
 </body>
 
 <template name="application">
-  {{#each stories}}
-    {{> story}}
-  {{/each}}
+  {{> storiesList parentId=null parentDepth=0}}
 </template>
 
 <template name="offline">

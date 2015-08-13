@@ -1,3 +1,11 @@
+window.storyDepth = (id) ->
+  parentId = Stories.findOne(id)?.parentId
+  
+  if parentId == null
+    0
+  else
+    1 + storyDepth(parentId)
+
 Template.story.events
   "click .story": (e, tmpl) ->
     if ! @editing
@@ -16,19 +24,6 @@ Template.story.helpers
       "selected"
     else
       ""
+  depth: ->
+    storyDepth(@_id)
       
-  widthPercentage: (depthLevel) ->
-    maximumDepth = 24
-    
-    if depthLevel == 0
-      100
-    else if depthLevel > maximumDepth
-      20
-    else
-      100 - (80 * (depthLevel / maximumDepth))
-
-Template.story.onCreated ->
-  #Mousetrap.bind "esc", ->
-    #console.log "esc key pressed"
-    #Stories.update({editing: true}, {editing: false}, {multi: true})
-    

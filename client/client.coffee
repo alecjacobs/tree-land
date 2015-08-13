@@ -11,10 +11,6 @@ root.serializeForm = (formElement) ->
 Accounts.ui.config
   passwordSignupFields: "USERNAME_ONLY"
 
-Template.application.helpers
-  stories: ->
-    Stories.find({})
-
 Template.registerHelper "meteorStatus", ->
   Meteor.status()
 

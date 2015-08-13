@@ -8,9 +8,6 @@ Schemas.Stories = new SimpleSchema
     type: String
     max: 140
     optional: true
-  depth:
-    type: Number
-    min: 0
   parentId:
     type: String
     optional: true
