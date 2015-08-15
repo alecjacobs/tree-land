@@ -1,13 +1,15 @@
 <template name="navigation">
-  <nav class="navbar navbar-default">
+  <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">
           TreeLand
         </a>
-        <p class="navbar-text navbar-right">
+
+        <div class="navbar-brand">
           {{> loginButtons}}
-        </p>
+        </div>
+
         <p class="navbar-text connection-indicator {{connectionState}}">
           {{connectionState}}
         </p>

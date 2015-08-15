@@ -30,5 +30,5 @@ Stories.defaults =
   position: 0
 
 Stories.create = (storyData) ->
-  resultDoc = _.extend(@defaults, storyData)
+  resultDoc = _.extend({}, @defaults, storyData)
   Stories.insert(resultDoc)

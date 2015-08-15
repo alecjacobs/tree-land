@@ -1,25 +1,29 @@
 .story {
+  color: lightgrey;
   float: right;
-  
   width: 100%;
-  
   border: 1px solid lightgrey;
   border-right: 0;
-  
   margin-top: 10px;
-  
   cursor: pointer;
-  
+
   .title {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
+  .title-edit {
+    background-color: #333;
+    border: 0;
+  }
+
   .title, .title-edit {
+    font-size: 40px;
     display: inline-block;
     float: left;
     width: 80%;
+    padding-left: 1%;
   }
 
   .btn-group {
@@ -33,18 +37,18 @@
   }
 
   .state-indicator {
-    height: 80px;
+    height: 72px;
     float: left;
     display: inline-box;
     width: 10px;
     margin-right: 1px;
 
     &.editing {
-      background-color: black;
+      background-color: white;
     }
-    
+
     &.selected {
-      background-color: lightgrey;
+      background-color: grey;
     }
   }
 }

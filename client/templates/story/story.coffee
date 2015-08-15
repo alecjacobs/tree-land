@@ -1,6 +1,6 @@
 window.storyDepth = (id) ->
   parentId = Stories.findOne(id)?.parentId
-  
+
   if parentId == null
     0
   else
@@ -13,9 +13,10 @@ Template.story.events
       Stories.update @_id, {$set: {editing: true}}, ->
         $(tmpl.find(".title-edit")).focus().select()
   "blur .story": (e, tmpl) ->
-    formData = serializeForm(tmpl.find("#storyUpdateForm"))
-    formData.editing = false
-    Stories.update(@_id, {$set: formData})
+    if @editing
+      formData = serializeForm(tmpl.find("#storyUpdateForm"))
+      formData.editing = false
+      Stories.update(@_id, {$set: formData})
 
 Template.story.helpers
   state: ->
