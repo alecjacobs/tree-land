@@ -47,14 +47,18 @@ Template.body.onCreated ->
         syblingAbove = Stories.findOne(syblingsAbove, {sort: {position: 1}})
         syblingAboveChild = Stories.findOne({parentId: syblingAbove._id}, {sort: {position: 1}})
 
-        if syblingAboveChild
+        if syblingAboveChild && syblingAbove.showChildren
           Session.set("selectedStoryId", syblingAboveChild._id)
         else
           Session.set("selectedStoryId", syblingAbove._id)
     else if keyPressed == "down"
       if Stories.find(childrenSelector).count() > 0
-        firstChild = Stories.findOne(childrenSelector, {sort: {position: -1}})
-        Session.set("selectedStoryId", firstChild._id)
+        if currentStory.showChildren
+          firstChild = Stories.findOne(childrenSelector, {sort: {position: -1}})
+          Session.set("selectedStoryId", firstChild._id)
+        else
+          syblingBelow = Stories.findOne(syblingsBelow, {sort: {position: -1}})
+          Session.set("selectedStoryId", syblingBelow._id)
       else if Stories.find(childrenSelector).count() == 0
         if Stories.find(syblingsBelow).count()
           syblingBelow = Stories.findOne(syblingsBelow, {sort: {position: -1}})
