@@ -28,3 +28,10 @@ Template.story.helpers
       ""
   depth: ->
     storyDepth(@_id)
+  hasChildren: ->
+    Stories.find({parentId: @_id}).count()
+  triangleDirection: ->
+    if @showChildren
+      "bottom"
+    else
+      "right"

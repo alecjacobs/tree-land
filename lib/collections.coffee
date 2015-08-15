@@ -18,6 +18,8 @@ Schemas.Stories = new SimpleSchema
     type: Boolean
   position:
     type: Number
+  showChildren:
+    type: Boolean
 
 Stories.attachSchema(Schemas.Stories)
 

@@ -1,11 +1,18 @@
 <template name="story">
-  <div class="story">
+  <div class="story" data-story-id="{{_id}}">
     <div class="state-indicator {{state}}"></div>
+    {{#if hasChildren}}
+      <div class="show-children">
+        <span class="glyphicon glyphicon-triangle-{{triangleDirection}}"></span>
+      </div>
+    {{/if}}
     {{> storyTitle this}}
     {{> buttonGroup this}}
   </div>
-  
+
   <div class="clearfix"></div>
-  
-  {{> storiesList parentId=_id}}
+
+  {{#if showChildren}}
+    {{> storiesList parentId=_id}}
+  {{/if}}
 </template>

@@ -70,6 +70,15 @@ Template.body.onCreated ->
 
           if nextStory
             Session.set("selectedStoryId", nextStory._id)
+    else if keyPressed == "left"
+      Stories.update(currentStory._id, {$set: {showChildren: false}})
+    else if keyPressed == "right"
+      Stories.update(currentStory._id, {$set: {showChildren: true}})
+    else if keyPressed == "enter"
+      $("[data-story-id='#{currentStory._id}']").click()
 
   Mousetrap.bind "down", handleArrow
   Mousetrap.bind "up", handleArrow
+  Mousetrap.bind "left", handleArrow
+  Mousetrap.bind "right", handleArrow
+  Mousetrap.bind "enter", handleArrow
