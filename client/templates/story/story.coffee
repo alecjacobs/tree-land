@@ -8,6 +8,7 @@ window.storyDepth = (id) ->
 
 Template.story.events
   "click .story": (e, tmpl) ->
+    Session.set("selectedStoryId", @_id)
     if ! @editing
       Stories.update @_id, {$set: {editing: true}}, ->
         $(tmpl.find(".title-edit")).focus().select()
