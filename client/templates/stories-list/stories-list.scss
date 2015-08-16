@@ -1,9 +1,13 @@
 .stories-list {
   border-left: 1px solid lightgrey;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 20px;
 
   .story:first-child {
     margin-top: 0;
+  }
+
+  &.is-root {
+    border-left: 0;
   }
 }

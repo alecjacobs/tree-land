@@ -1,5 +1,5 @@
 <template name="storiesList">
-  <div class="stories-list" style="padding-left: {{leftPadding}}px;">
+  <div class="stories-list {{#if parentId}}is-child{{else}}is-root{{/if}}" style="padding-left: {{leftPadding}}px;">
     {{#each stories}}
       {{> story}}
     {{/each}}
