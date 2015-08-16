@@ -2,10 +2,8 @@ root = window
 
 root.serializeForm = (formElement) ->
   formData = {}
-
   $(formElement).serializeArray().map (inputObject) ->
     formData[inputObject.name] = inputObject.value
-
   formData
 
 Accounts.ui.config
@@ -23,7 +21,7 @@ Template.application.onCreated ->
     Session.setDefault("selectedStoryId", Stories.findOne({parentId: null})?._id)
 
 Template.body.onCreated ->
-  handleArrow = (keyEvent, keyPressed) ->
+  handleKeypress = (keyEvent, keyPressed) ->
     currentStory = Stories.findOne(Session.get("selectedStoryId"))
 
     unless currentStory
@@ -80,9 +78,13 @@ Template.body.onCreated ->
       Stories.update(currentStory._id, {$set: {showChildren: true}})
     else if keyPressed == "enter"
       $("[data-story-id='#{currentStory._id}']").click()
+    else if keyPressed == "n"
+      $("[data-story-id='#{currentStory._id}'] .btn-group .add").click()
+      $("[data-story-id='#{currentStory._id}'] .title-edit").click()
 
-  Mousetrap.bind "down", handleArrow
-  Mousetrap.bind "up", handleArrow
-  Mousetrap.bind "left", handleArrow
-  Mousetrap.bind "right", handleArrow
-  Mousetrap.bind "enter", handleArrow
+  Mousetrap.bind "down", handleKeypress
+  Mousetrap.bind "up", handleKeypress
+  Mousetrap.bind "left", handleKeypress
+  Mousetrap.bind "right", handleKeypress
+  Mousetrap.bind "enter", handleKeypress
+  Mousetrap.bind "n", handleKeypress
