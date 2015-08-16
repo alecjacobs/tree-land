@@ -25,11 +25,11 @@ Stories.attachSchema(Schemas.Stories)
 
 Stories.defaults =
   title: ""
-  depth: 0
   parentId: null
   userId: null
   editing: false
   position: 0
+  showChildren: true
 
 Stories.create = (storyData) ->
   resultDoc = _.extend({}, @defaults, storyData)
