@@ -8,7 +8,6 @@ window.storyDepth = (id) ->
 
 Template.story.events
   "click .story": (e, tmpl) ->
-    Session.set("selectedStoryId", null)
     if ! @editing
       Stories.update @_id, {$set: {editing: true}}, ->
         $(tmpl.find(".title-edit")).focus().select()
@@ -17,6 +16,9 @@ Template.story.events
       formData = serializeForm(tmpl.find("#storyUpdateForm"))
       formData.editing = false
       Stories.update(@_id, {$set: formData})
+  "click .show-children": (e, tmpl) ->
+    e.stopPropagation()
+    Stories.update(@_id, {$set: {showChildren: (! @showChildren)}})
 
 Template.story.helpers
   state: ->
