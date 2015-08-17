@@ -12,6 +12,12 @@ Accounts.ui.config
 Template.registerHelper "meteorStatus", ->
   Meteor.status()
 
+Template.application.helpers
+  topLevelStoryId: ->
+    Session.get("rootLevelStoryId") || null
+  topLevelStoryTitle: ->
+    Stories.findOne(Session.get("rootLevelStoryId"))?.title
+
 Template.application.onCreated ->
   @subscribe "stories", ->
     Tracker.autorun ->
@@ -88,6 +94,10 @@ Template.body.onCreated ->
     else if keyPressed == "n"
       $("[data-story-id='#{currentStory._id}'] .btn-group .add").click()
       $("[data-story-id='#{currentStory._id}'] .title-edit").click()
+    else if keyPressed == "e"
+      Session.set("rootLevelStoryId", currentStory._id)
+    else if keyPressed == "esc"
+      Session.set("rootLevelStoryId", null)
 
   Mousetrap.bind "down", handleKeypress
   Mousetrap.bind "up", handleKeypress
@@ -95,3 +105,5 @@ Template.body.onCreated ->
   Mousetrap.bind "right", handleKeypress
   Mousetrap.bind "enter", handleKeypress
   Mousetrap.bind "n", handleKeypress
+  Mousetrap.bind "e", handleKeypress
+  Mousetrap.bind "esc", handleKeypress

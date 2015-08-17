@@ -4,7 +4,7 @@
 
 <body>
   {{> navigation}}
-  
+
   {{#if meteorStatus.connected}}
     {{> application}}
   {{else}}
@@ -13,7 +13,12 @@
 </body>
 
 <template name="application">
-  {{> storiesList parentId=null parentDepth=0}}
+  {{#if topLevelStoryId}}
+    <div class="top-level-story">
+      <h1>{{topLevelStoryTitle}} > </h1>
+    </div>
+  {{/if}}
+  {{> storiesList parentId=topLevelStoryId parentDepth=0}}
 </template>
 
 <template name="offline">
