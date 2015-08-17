@@ -13,12 +13,7 @@
 </body>
 
 <template name="application">
-  {{#if topLevelStoryId}}
-    <div class="top-level-story">
-      <h1>{{topLevelStoryTitle}} > </h1>
-    </div>
-  {{/if}}
-  {{> storiesList parentId=topLevelStoryId parentDepth=0}}
+  {{> story topLevelStory}}
 </template>
 
 <template name="offline">

@@ -1,6 +1,5 @@
 window.storyDepth = (id) ->
   parentId = Stories.findOne(id)?.parentId
-
   if parentId == null
     0
   else

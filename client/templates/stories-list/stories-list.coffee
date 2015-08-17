@@ -13,7 +13,8 @@ Template.storiesList.helpers
   leftPadding: ->
     "30"
   showBorder: ->
-    if @parentId && (@parentId != Session.get("rootLevelStoryId"))
+    if @parentId && (@_id != Session.get("rootLevelStoryId"))
+      console.log @_id
       true
     else
       false

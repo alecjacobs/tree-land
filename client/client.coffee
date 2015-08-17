@@ -13,10 +13,11 @@ Template.registerHelper "meteorStatus", ->
   Meteor.status()
 
 Template.application.helpers
-  topLevelStoryId: ->
-    Session.get("rootLevelStoryId") || null
-  topLevelStoryTitle: ->
-    Stories.findOne(Session.get("rootLevelStoryId"))?.title
+  topLevelStory: ->
+    if Session.get("rootLevelStoryId")
+      Stories.findOne(Session.get("rootLevelStoryId"))
+    else
+      Stories.findOne({parentId: null})
 
 Template.application.onCreated ->
   @subscribe "stories", ->
