@@ -73,9 +73,16 @@ Template.body.onCreated ->
           if nextStory
             Session.set("selectedStoryId", nextStory._id)
     else if keyPressed == "left"
-      Stories.update(currentStory._id, {$set: {showChildren: false}})
+      # collapse
+      if Stories.find(childrenSelector).count() > 0 && currentStory.showChildren
+        Stories.update(currentStory._id, {$set: {showChildren: false}})
+      else
+        Session.set("selectedStoryId", currentStory.parentId)
+        Stories.update(currentStory.parentId, {$set: {showChildren: false}})
     else if keyPressed == "right"
-      Stories.update(currentStory._id, {$set: {showChildren: true}})
+      # expand
+      if Stories.find(childrenSelector).count() > 0
+        Stories.update(currentStory._id, {$set: {showChildren: true}})
     else if keyPressed == "enter"
       $("[data-story-id='#{currentStory._id}']").click()
     else if keyPressed == "n"

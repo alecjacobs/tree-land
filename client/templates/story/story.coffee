@@ -17,7 +17,7 @@ Template.story.events
       formData = serializeForm(tmpl.find("#storyUpdateForm"))
       formData.editing = false
       Stories.update(@_id, {$set: formData})
-  "click .show-children": (e, tmpl) ->
+  "click .show-children, click .state-indicator": (e, tmpl) ->
     e.stopPropagation()
     Stories.update(@_id, {$set: {showChildren: (! @showChildren)}})
 

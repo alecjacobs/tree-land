@@ -3,7 +3,7 @@ Template.storiesList.helpers
     Stories.find({parentId: @parentId}, {sort: {position: -1}})
   widthPercentage: (depthLevel) ->
     maximumDepth = 24
-    
+
     if depthLevel == 0
       100
     else if depthLevel > maximumDepth
@@ -12,3 +12,8 @@ Template.storiesList.helpers
       100 - (80 * (depthLevel / maximumDepth))
   leftPadding: ->
     "30"
+  showBorder: ->
+    if @parentId
+      true
+    else
+      false
