@@ -38,3 +38,5 @@ Template.story.helpers
       "bottom"
     else
       "right"
+  showStoriesList: ->
+    @showChildren && (Stories.find({parentId: @_id}).count() > 0)
