@@ -1,6 +1,19 @@
 root = window ? global
 
-root.Stories = new Mongo.Collection("stories")
+class root.Story
+  constructor: (doc) ->
+    _.extend(this, doc)
+
+  children: ->
+    Stories.find({parentId: @_id})
+
+  syblings: ->
+    Stories.find({parentId: @parentId})
+
+root.Stories = new Mongo.Collection "stories",
+  transform: (doc) ->
+    new Story(doc)
+
 root.Schemas = {}
 
 Schemas.Stories = new SimpleSchema
