@@ -35,61 +35,42 @@ Template.body.onCreated ->
       currentStory = Stories.findOne({parentId: null})
       Session.set("selectedStoryId", currentStory._id)
 
-    parent = Stories.findOne(currentStory.parentId, {sort: {position: -1}})
-
-    syblingsSelector = {parentId: currentStory.parentId}
-    childrenSelector = {parentId: currentStory._id}
-    positionLt = {position: {$lt: currentStory.position}}
-    positionGt = {position: {$gt: currentStory.position}}
-    syblingsBelow = _.extend({}, positionLt, syblingsSelector)
-    syblingsAbove = _.extend({}, positionGt, syblingsSelector)
+    parent = Stories.findOne(currentStory.parentId)
 
     if keyPressed == "up"
-      if Stories.find(syblingsAbove).count() == 0
-        if currentStory.parentId
-          Session.set("selectedStoryId", parent._id)
-      else if Stories.find(syblingsAbove).count() > 0
-        syblingAbove = Stories.findOne(syblingsAbove, {sort: {position: 1}})
-        syblingAboveChild = Stories.findOne({parentId: syblingAbove._id}, {sort: {position: 1}})
+      if currentStory.parentId && !currentStory.syblingsAbove().count()
+        Session.set("selectedStoryId", parent._id)
+      else if currentStory.syblingsAbove().count()
+        syblingAbove = currentStory.firstSyblingAbove()
+        syblingChildAbove = syblingAbove.lastChild()
 
-        if syblingAboveChild && syblingAbove.showChildren
-          Session.set("selectedStoryId", syblingAboveChild._id)
+        if syblingChildAbove && syblingAbove.showChildren
+          Session.set("selectedStoryId", syblingChildAbove._id)
         else
           Session.set("selectedStoryId", syblingAbove._id)
     else if keyPressed == "down"
-      if Stories.find(childrenSelector).count() > 0
+      if currentStory.hasChildren()
         if currentStory.showChildren
-          firstChild = Stories.findOne(childrenSelector, {sort: {position: -1}})
-          Session.set("selectedStoryId", firstChild._id)
+          Session.set("selectedStoryId", currentStory.firstChild()._id)
         else
-          syblingBelow = Stories.findOne(syblingsBelow, {sort: {position: -1}})
-          Session.set("selectedStoryId", syblingBelow._id)
-      else if Stories.find(childrenSelector).count() == 0
-        if Stories.find(syblingsBelow).count()
-          syblingBelow = Stories.findOne(syblingsBelow, {sort: {position: -1}})
-          Session.set("selectedStoryId", syblingBelow._id)
-        else
-          # go to parent's sybling below
-          selector =
-            parentId: parent.parentId
-            position:
-              $lt: parent.position
-
-          nextStory = Stories.findOne(selector, {sort: {position: -1}})
-
-          if nextStory
-            Session.set("selectedStoryId", nextStory._id)
-    else if keyPressed == "left"
-      # collapse
-      if Stories.find(childrenSelector).count() > 0 && currentStory.showChildren
-        Stories.update(currentStory._id, {$set: {showChildren: false}})
+          if currentStory.syblingsBelow().count()
+            Session.set("selectedStoryId", currentStory.firstSyblingBelow()._id)
       else
-        Session.set("selectedStoryId", currentStory.parentId)
-        Stories.update(currentStory.parentId, {$set: {showChildren: false}})
+        if currentStory.syblingsBelow().count()
+          Session.set("selectedStoryId", currentStory.firstSyblingBelow()._id)
+        else
+          nextStoryId = parent.firstSyblingBelow()?._id
+          if nextStoryId then Session.set("selectedStoryId", nextStoryId)
+    else if keyPressed == "left"
+      if currentStory.showChildren && currentStory.hasChildren()
+        currentStory.collapse()
+      else
+        if parent
+          Session.set("selectedStoryId", parent._id)
+          parent.collapse()
     else if keyPressed == "right"
-      # expand
-      if Stories.find(childrenSelector).count() > 0
-        Stories.update(currentStory._id, {$set: {showChildren: true}})
+      if currentStory.hasChildren()
+        currentStory.expand()
     else if keyPressed == "enter"
       $("[data-story-id='#{currentStory._id}']").click()
     else if keyPressed == "n"
