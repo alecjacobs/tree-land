@@ -9,6 +9,9 @@ class root.Story
     @syblingsAboveSelector = _.extend({position: {$gt: @position}}, @syblingsSelector)
     @syblingsBelowSelector = _.extend({position: {$lt: @position}}, @syblingsSelector)
 
+  parent: ->
+    Stories.findOne(@parentId)
+
   children: ->
     Stories.find(@childrenSelector)
 

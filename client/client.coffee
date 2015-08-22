@@ -28,49 +28,56 @@ Template.application.onCreated ->
     Session.setDefault("selectedStoryId", Stories.findOne({parentId: null})?._id)
 
 Template.body.onCreated ->
+  moveUp = (currentStory) ->
+    if currentStory.parentId && !currentStory.syblingsAbove().count()
+      Session.set("selectedStoryId", currentStory.parentId)
+    else if currentStory.syblingsAbove().count()
+      inspectingStory = currentStory.firstSyblingAbove()
+      while inspectingStory.showChildren && inspectingStory.lastChild()
+        inspectingStory = inspectingStory.lastChild()
+
+      Session.set("selectedStoryId", inspectingStory._id)
+
+  moveDown = (currentStory) ->
+    if currentStory.showChildren && currentStory.hasChildren()
+      Session.set("selectedStoryId", currentStory.firstChild()._id)
+    else
+      if currentStory.syblingsBelow().count()
+        Session.set("selectedStoryId", currentStory.firstSyblingBelow()._id)
+      else
+        inspectingStory = currentStory
+        while !nextStoryId && inspectingStory.parentId
+          nextStoryId = inspectingStory.parent().firstSyblingBelow()?._id
+          inspectingStory = inspectingStory.parent()
+
+        if nextStoryId then Session.set("selectedStoryId", nextStoryId)
+
+  moveLeft = (currentStory) ->
+    if currentStory.showChildren && currentStory.hasChildren()
+      currentStory.collapse()
+    else if currentStory.parentId
+      Session.set("selectedStoryId", currentStory.parentId)
+      currentStory.parent().collapse()
+
+  moveRight = (currentStory) ->
+    if currentStory.hasChildren()
+      currentStory.expand()
+
   handleKeypress = (keyEvent, keyPressed) ->
     currentStory = Stories.findOne(Session.get("selectedStoryId"))
 
-    unless currentStory
+    if !currentStory
       currentStory = Stories.findOne({parentId: null})
       Session.set("selectedStoryId", currentStory._id)
 
-    parent = Stories.findOne(currentStory.parentId)
-
     if keyPressed == "up"
-      if currentStory.parentId && !currentStory.syblingsAbove().count()
-        Session.set("selectedStoryId", parent._id)
-      else if currentStory.syblingsAbove().count()
-        syblingAbove = currentStory.firstSyblingAbove()
-        syblingChildAbove = syblingAbove.lastChild()
-
-        if syblingChildAbove && syblingAbove.showChildren
-          Session.set("selectedStoryId", syblingChildAbove._id)
-        else
-          Session.set("selectedStoryId", syblingAbove._id)
+      moveUp(currentStory)
     else if keyPressed == "down"
-      if currentStory.hasChildren()
-        if currentStory.showChildren
-          Session.set("selectedStoryId", currentStory.firstChild()._id)
-        else
-          if currentStory.syblingsBelow().count()
-            Session.set("selectedStoryId", currentStory.firstSyblingBelow()._id)
-      else
-        if currentStory.syblingsBelow().count()
-          Session.set("selectedStoryId", currentStory.firstSyblingBelow()._id)
-        else
-          nextStoryId = parent.firstSyblingBelow()?._id
-          if nextStoryId then Session.set("selectedStoryId", nextStoryId)
+      moveDown(currentStory)
     else if keyPressed == "left"
-      if currentStory.showChildren && currentStory.hasChildren()
-        currentStory.collapse()
-      else
-        if parent
-          Session.set("selectedStoryId", parent._id)
-          parent.collapse()
+      moveLeft(currentStory)
     else if keyPressed == "right"
-      if currentStory.hasChildren()
-        currentStory.expand()
+      moveRight(currentStory)
     else if keyPressed == "enter"
       $("[data-story-id='#{currentStory._id}']").click()
     else if keyPressed == "n"
@@ -81,11 +88,4 @@ Template.body.onCreated ->
     else if keyPressed == "esc"
       Session.set("rootLevelStoryId", null)
 
-  Mousetrap.bind "down", handleKeypress
-  Mousetrap.bind "up", handleKeypress
-  Mousetrap.bind "left", handleKeypress
-  Mousetrap.bind "right", handleKeypress
-  Mousetrap.bind "enter", handleKeypress
-  Mousetrap.bind "n", handleKeypress
-  Mousetrap.bind "e", handleKeypress
-  Mousetrap.bind "esc", handleKeypress
+  Mousetrap.bind(["down","up","left","right","enter","n","e","esc"], handleKeypress)

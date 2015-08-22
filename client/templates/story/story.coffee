@@ -18,7 +18,7 @@ Template.story.events
       Stories.update(@_id, {$set: formData})
   "click .show-children, click .state-indicator": (e, tmpl) ->
     e.stopPropagation()
-    Stories.update(@_id, {$set: {showChildren: (! @showChildren)}})
+    Stories.update(@_id, {$set: {showChildren: !@showChildren}})
 
 Template.story.helpers
   state: ->
