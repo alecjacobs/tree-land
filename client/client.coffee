@@ -55,13 +55,14 @@ Template.body.onCreated ->
   moveLeft = (currentStory) ->
     if currentStory.showChildren && currentStory.hasChildren()
       currentStory.collapse()
-    else if currentStory.parentId
-      Session.set("selectedStoryId", currentStory.parentId)
-      currentStory.parent().collapse()
+    else
+      moveUp(currentStory)
 
   moveRight = (currentStory) ->
-    if currentStory.hasChildren()
+    if !currentStory.showChildren && currentStory.hasChildren()
       currentStory.expand()
+    else
+      moveDown(currentStory)
 
   handleKeypress = (keyEvent, keyPressed) ->
     currentStory = Stories.findOne(Session.get("selectedStoryId"))
