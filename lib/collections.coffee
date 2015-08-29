@@ -45,6 +45,26 @@ class root.Story
   collapse: ->
     Stories.update(@_id, {$set: {showChildren: false}})
 
+  addStoryBelow: ->
+    @expand()
+
+    newStoryDoc =
+      title: ""
+      editing: true
+      position: Stories.defaults.position
+      parentId: @_id
+
+    if @hasChildren()
+      stories = Stories.find({parentId: @_id}).fetch()
+
+      maxStory = _.max stories, (story) ->
+        story.position
+
+      newStoryDoc.position = maxStory.position + 1
+
+    Stories.create newStoryDoc, (error, result) ->
+      if error
+        throw error
 
 root.Stories = new Mongo.Collection "stories",
   transform: (doc) ->
@@ -80,6 +100,6 @@ Stories.defaults =
   position: 0
   showChildren: true
 
-Stories.create = (storyData) ->
+Stories.create = (storyData, callback) ->
   resultDoc = _.extend({}, @defaults, storyData)
-  Stories.insert(resultDoc)
+  Stories.insert(resultDoc, callback)

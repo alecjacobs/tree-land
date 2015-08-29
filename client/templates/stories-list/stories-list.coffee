@@ -10,5 +10,3 @@ Template.storiesList.helpers
       20
     else
       100 - (80 * (depthLevel / maximumDepth))
-  leftPadding: ->
-    "30"

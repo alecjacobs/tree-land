@@ -1,11 +1,11 @@
 <template name="story">
   <div class="story" data-story-id="{{_id}}">
     <div class="state-indicator {{state}}"></div>
-    {{#if hasChildren}}
-      <div class="show-children">
+    <div class="show-children">
+      {{#if hasChildren}}
         <span class="glyphicon glyphicon-triangle-{{triangleDirection}}"></span>
-      </div>
-    {{/if}}
+      {{/if}}
+    </div>
     {{> storyTitle this}}
     {{> buttonGroup this}}
   </div>
