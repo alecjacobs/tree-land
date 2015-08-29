@@ -82,8 +82,7 @@ Template.body.onCreated ->
     else if keyPressed == "enter"
       $("[data-story-id='#{currentStory._id}']").click()
     else if keyPressed == "n"
-      $("[data-story-id='#{currentStory._id}'] .btn-group .add").click()
-      $("[data-story-id='#{currentStory._id}'] .title-edit").click()
+      currentStory.addStoryBelow()
     else if keyPressed == "e"
       Session.set("rootLevelStoryId", currentStory._id)
     else if keyPressed == "esc"

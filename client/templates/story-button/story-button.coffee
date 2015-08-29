@@ -8,11 +8,6 @@ Template.storyButton.events
     if @depth > 0
       Stories.update(@_id, {$set: {depth: (@depth - 1)}})
 
-  "click .add": (e, tmpl) ->
-    e.stopPropagation()
-    story = Stories.findOne(@_id)
-    story.addStoryBelow()
-
   "click .delete": (e, tmpl) ->
     e.stopPropagation()
     Stories.remove(@_id)

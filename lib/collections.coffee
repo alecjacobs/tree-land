@@ -65,6 +65,10 @@ class root.Story
     Stories.create newStoryDoc, (error, result) ->
       if error
         throw error
+      else
+        if Meteor.isClient
+          Session.set("selectedStoryId", result)
+          $("[data-story-id='#{result}'] .title-edit").focus().select()
 
 root.Stories = new Mongo.Collection "stories",
   transform: (doc) ->
