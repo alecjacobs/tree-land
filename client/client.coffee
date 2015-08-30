@@ -6,9 +6,6 @@ root.serializeForm = (formElement) ->
     formData[inputObject.name] = inputObject.value
   formData
 
-Accounts.ui.config
-  passwordSignupFields: "USERNAME_ONLY"
-
 Template.registerHelper "meteorStatus", ->
   Meteor.status()
 

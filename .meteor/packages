@@ -9,7 +9,6 @@ insecure
 twbs:bootstrap
 coffeescript
 aldeed:collection2
-accounts-ui
 accounts-password
 fourseven:scss
 momentjs:moment
