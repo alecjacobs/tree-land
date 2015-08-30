@@ -9,20 +9,12 @@ root.serializeForm = (formElement) ->
 Template.registerHelper "meteorStatus", ->
   Meteor.status()
 
+Template.registerHelper "collectionsLoaded", ->
+  Session.get("collectionsLoaded")
+
 Template.application.helpers
   topLevelStory: ->
-    if Session.get("rootLevelStoryId")
-      Stories.findOne(Session.get("rootLevelStoryId"))
-    else
-      Stories.findOne({parentId: null})
-
-Template.application.onCreated ->
-  @subscribe "stories", ->
-    Tracker.autorun ->
-      if Meteor.status().connected && (Stories.find({parentId: null}).count() == 0)
-        Stories.create({title: "life"})
-
-    Session.setDefault("selectedStoryId", Stories.findOne({parentId: null})?._id)
+    Stories.findOne(Session.get("rootLevelStoryId") || {parentId: null})
 
 Template.body.onCreated ->
   moveUp = (currentStory) ->

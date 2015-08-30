@@ -14,7 +14,15 @@
 
 <template name="application">
   <div class="application">
-    {{> story topLevelStory}}
+    {{#if collectionsLoaded}}
+      {{#if topLevelStory}}
+        {{> story topLevelStory}}
+      {{else}}
+        <h1 class="global-notification">Nothing here</h1>
+      {{/if}}
+    {{else}}
+      <h1 class="global-notification">Loading...</h1>
+    {{/if}}
   </div>
   <footer>
     {{> keymappings}}

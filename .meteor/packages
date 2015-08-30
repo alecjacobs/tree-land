@@ -13,3 +13,4 @@ accounts-password
 fourseven:scss
 momentjs:moment
 mousetrap:mousetrap
+kadira:flow-router

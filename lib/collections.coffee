@@ -59,7 +59,7 @@ class root.Story
     newStoryDoc =
       title: ""
       editing: true
-      position: Stories.defaults.position
+      position: Stories.defaults().position
       parentId: @_id
 
     if @hasChildren()
@@ -101,17 +101,21 @@ Schemas.Stories = new SimpleSchema
     type: Number
   showChildren:
     type: Boolean
+  secretKey:
+    type: String
+    optional: true
 
 Stories.attachSchema(Schemas.Stories)
 
-Stories.defaults =
+Stories.defaults = ->
   title: ""
   parentId: null
   userId: null
   editing: false
   position: 0
   showChildren: true
+  secretKey: (if Meteor.isClient then Session.get("storyKey") else null)
 
 Stories.create = (storyData, callback) ->
-  resultDoc = _.extend({}, @defaults, storyData)
+  resultDoc = _.extend({}, @defaults(), storyData)
   Stories.insert(resultDoc, callback)
