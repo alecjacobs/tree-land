@@ -97,7 +97,9 @@ Template.body.onCreated ->
         Session.set("rootLevelStoryId", currentStory._id)
       else if keyPressed == "d"
         Session.set("pendingDeleteId", currentStory._id)
+      else if keyPressed == "h"
+        Session.set("showHelp", !Session.get("showHelp"))
       else if keyPressed == "esc"
         Session.set("rootLevelStoryId", null)
 
-  Mousetrap.bind(["down","up","left","right","enter","n","e","d","y","esc"], handleKeypress)
+  Mousetrap.bind(["down","up","left","right","enter","n","e","d","y","h","esc"], handleKeypress)
