@@ -71,21 +71,33 @@ Template.body.onCreated ->
       currentStory = Stories.findOne({parentId: null})
       Session.set("selectedStoryId", currentStory._id)
 
-    if keyPressed == "up"
-      moveUp(currentStory)
-    else if keyPressed == "down"
-      moveDown(currentStory)
-    else if keyPressed == "left"
-      moveLeft(currentStory)
-    else if keyPressed == "right"
-      moveRight(currentStory)
-    else if keyPressed == "enter"
-      $("[data-story-id='#{currentStory._id}']").click()
-    else if keyPressed == "n"
-      currentStory.addStoryBelow()
-    else if keyPressed == "e"
-      Session.set("rootLevelStoryId", currentStory._id)
-    else if keyPressed == "esc"
-      Session.set("rootLevelStoryId", null)
+    if Session.get("pendingDeleteId")
+      if keyPressed == "y"
+        newSelectedId = currentStory.storyAboveId()
 
-  Mousetrap.bind(["down","up","left","right","enter","n","e","esc"], handleKeypress)
+        Stories.remove Session.get("pendingDeleteId"), ->
+          Session.set("selectedStoryId", newSelectedId)
+          Session.set("pendingDeleteId", null)
+      else
+        Session.set("pendingDeleteId", null)
+    else
+      if keyPressed == "up"
+        moveUp(currentStory)
+      else if keyPressed == "down"
+        moveDown(currentStory)
+      else if keyPressed == "left"
+        moveLeft(currentStory)
+      else if keyPressed == "right"
+        moveRight(currentStory)
+      else if keyPressed == "enter"
+        $("[data-story-id='#{currentStory._id}']").click()
+      else if keyPressed == "n"
+        currentStory.addStoryBelow()
+      else if keyPressed == "e"
+        Session.set("rootLevelStoryId", currentStory._id)
+      else if keyPressed == "d"
+        Session.set("pendingDeleteId", currentStory._id)
+      else if keyPressed == "esc"
+        Session.set("rootLevelStoryId", null)
+
+  Mousetrap.bind(["down","up","left","right","enter","n","e","d","y","esc"], handleKeypress)

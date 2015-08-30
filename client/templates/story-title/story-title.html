@@ -11,6 +11,10 @@
         maxlength={{titleMaxChars}}>
     </form>
   {{else}}
-    <p class="title">{{title}}</p>
+    {{#if aboutToDelete}}
+      <p class="title pending-delete">Delete? yes (y) no (n)</p>
+    {{else}}
+      <p class="title">{{title}}</p>
+    {{/if}}
   {{/if}}
 </template>

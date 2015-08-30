@@ -8,3 +8,5 @@ Template.storyTitle.events
 Template.storyTitle.helpers
   titleMaxChars: ->
     Schemas.Stories._schema.title.max
+  aboutToDelete: ->
+    Session.get("pendingDeleteId") == @_id

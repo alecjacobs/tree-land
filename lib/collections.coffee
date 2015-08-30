@@ -18,6 +18,12 @@ class root.Story
   hasChildren: ->
     @children().count() > 0
 
+  expand: ->
+    Stories.update(@_id, {$set: {showChildren: true}})
+
+  collapse: ->
+    Stories.update(@_id, {$set: {showChildren: false}})
+
   firstChild: ->
     Stories.findOne(@childrenSelector, {sort: {position: -1}})
 
@@ -39,11 +45,13 @@ class root.Story
   firstSyblingBelow: ->
     Stories.findOne(@syblingsBelowSelector, {sort: {position: -1}})
 
-  expand: ->
-    Stories.update(@_id, {$set: {showChildren: true}})
-
-  collapse: ->
-    Stories.update(@_id, {$set: {showChildren: false}})
+  storyAboveId: ->
+    if @parentId && !@syblingsAbove().count()
+      @parentId
+    else if @syblingsAbove().count()
+      inspectingStory = @firstSyblingAbove()
+      while inspectingStory.showChildren && inspectingStory.lastChild()
+        inspectingStory.lastChild()._id
 
   addStoryBelow: ->
     @expand()
