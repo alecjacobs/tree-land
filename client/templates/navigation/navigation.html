@@ -5,13 +5,11 @@
         <a class="navbar-brand" href="#">
           TreeLand
         </a>
-
-        <div class="navbar-brand">
-          {{> loginButtons}}
-        </div>
-
-        <p class="navbar-text connection-indicator {{connectionState}}">
-          {{connectionState}}
+        <p class="connection-indicator {{connectionState}}">
+          {{#if meteorStatus.connected}}
+          {{else}}
+            offline
+          {{/if}}
         </p>
       </div>
     </div>

@@ -9,29 +9,6 @@ body {
   }
 }
 
-.navbar {
-  margin-bottom: 0;
-  border: 0;
-
-  a {
-    color: lightgrey;
-
-    &:hover {
-      background-color: lightgrey;
-      color: #333;
-    }
-  }
-}
-
-.connection-indicator {
-  padding: 0 10px;
-
-  &.connected {
-    background-color: #65ff70;
-  }
-
-  &.offline {
-    background-color: #FF6565;
-    color: white;
-  }
+.application {
+  margin-bottom: 128px;
 }

@@ -1,0 +1,29 @@
+.navbar {
+  margin-bottom: 0;
+  border: 0;
+
+  a {
+    color: lightgrey;
+
+    &:hover {
+      background-color: lightgrey;
+      color: #333;
+    }
+  }
+
+  .connection-indicator {
+    float: left;
+    margin-top: 14px;
+    padding: 0 10px;
+    height: 20px;
+
+    &.connected {
+      background-color: #65ff70;
+    }
+
+    &.offline {
+      background-color: #FF6565;
+      color: white;
+    }
+  }
+}
