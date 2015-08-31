@@ -1,5 +1,7 @@
 root = window
 
+Session.setDefault("showHelp", true)
+
 root.serializeForm = (formElement) ->
   formData = {}
   $(formElement).serializeArray().map (inputObject) ->
