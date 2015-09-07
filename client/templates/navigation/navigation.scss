@@ -2,13 +2,9 @@
   margin-bottom: 0;
   border: 0;
 
-  a {
-    color: lightgrey;
-
-    &:hover {
-      background-color: lightgrey;
-      color: #333;
-    }
+  a:hover {
+    background-color: lightgrey;
+    color: #333;
   }
 
   .connection-indicator {

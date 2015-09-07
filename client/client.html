@@ -1,8 +1,10 @@
 <head>
   <title>TreeLand</title>
+
 </head>
 
 <body>
+  {{> styles}}
   {{> navigation}}
 
   {{#if meteorStatus.connected}}
@@ -37,4 +39,21 @@
       ({{meteorStatus.retryCount}} attempts)
     </h3>
   </div>
+</template>
+
+<template name="styles">
+  <style>
+    body {
+      background-color: #333;
+      color: lightgrey;
+    }
+
+    a {
+      color: lightgrey;
+    }
+
+    input {
+      background-color: #333;
+    }
+  </style>
 </template>
