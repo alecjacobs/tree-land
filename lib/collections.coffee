@@ -104,6 +104,9 @@ Schemas.Stories = new SimpleSchema
   secretKey:
     type: String
     optional: true
+  backgroundColor:
+    type: String
+    optional: true
 
 Stories.attachSchema(Schemas.Stories)
 
@@ -119,3 +122,7 @@ Stories.defaults = ->
 Stories.create = (storyData, callback) ->
   resultDoc = _.extend({}, @defaults(), storyData)
   Stories.insert(resultDoc, callback)
+
+Stories.topLevelStory = ->
+  if Meteor.isClient
+    @findOne(Session.get("rootLevelStoryId") || {parentId: null})

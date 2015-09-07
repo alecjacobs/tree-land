@@ -4,3 +4,4 @@ Template.navigation.helpers
       "connected"
     else
       "offline"
+  

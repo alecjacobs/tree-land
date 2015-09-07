@@ -16,7 +16,7 @@ Template.registerHelper "collectionsLoaded", ->
 
 Template.application.helpers
   topLevelStory: ->
-    Stories.findOne(Session.get("rootLevelStoryId") || {parentId: null})
+    Stories.topLevelStory()
 
 Template.body.onCreated ->
   moveUp = (currentStory) ->
