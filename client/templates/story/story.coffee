@@ -19,6 +19,11 @@ Template.story.events
   "click .show-children, click .state-indicator": (e, tmpl) ->
     e.stopPropagation()
     Stories.update(@_id, {$set: {showChildren: !@showChildren}})
+  "keydown": (e, tmpl) ->
+    if e.which == 27 && @editing
+      formData = serializeForm(tmpl.find("#storyUpdateForm"))
+      formData.editing = false
+      Stories.update(@_id, {$set: formData})
 
 Template.story.helpers
   state: ->
