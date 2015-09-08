@@ -46,8 +46,8 @@ Template.body.onCreated ->
   moveLeft = (currentStory) ->
     if currentStory.showChildren && currentStory.hasChildren()
       currentStory.collapse()
-    else
-      moveUp(currentStory)
+    else if currentStory.parentId
+        Session.set("selectedStoryId", currentStory.parentId)
 
   moveRight = (currentStory) ->
     if !currentStory.showChildren && currentStory.hasChildren()
