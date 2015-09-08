@@ -22,18 +22,15 @@
 
   .connection-indicator {
     float: left;
-    margin-top: 18px;
+    margin-top: 6px;
     padding: 6px;
-    border-radius: 50%;
-
 
     &.connected {
-      background-color: #65ff70;
+      color: #65ff70;
     }
 
     &.offline {
-      background-color: #FF6565;
-      color: white;
+      color: #FF6565;
     }
   }
 }
