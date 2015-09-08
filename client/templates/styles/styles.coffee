@@ -1,3 +1,3 @@
 Template.styles.helpers
-  backgroundColor: ->
-    Stories.topLevelStory()?.backgroundColor || "#333"
+  themeColors: ->
+    Theme.colorValues()

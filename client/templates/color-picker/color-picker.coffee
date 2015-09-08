@@ -1,7 +1,19 @@
 Template.colorPicker.events
-  "changeColor .background.color-picker": (e, tmpl) ->
+  "changeColor .color-picker": (e, tmpl) ->
     newColor = e.color.toHex()
-    Stories.update(Stories.topLevelStory()._id, {$set: {backgroundColor: newColor}})
+    updateDoc = {$set: {}}
+    updateDoc.$set["themeColors.#{@name}"] = newColor
+
+    Stories.update(Stories.topLevelStory()._id, updateDoc)
+
+Template.colorPicker.helpers
+  backgroundColor: ->
+    Theme.colorValues()[@name]
 
 Template.colorPicker.onRendered ->
-  $(@find(".color-picker")).colorpicker()
+  $pickerElement = $(@find(".#{@data.name}.color-picker"))
+  name = @data.name
+
+  Tracker.autorun ->
+    if Session.get("collectionsLoaded")
+      $pickerElement.colorpicker({color: Theme.colorValues()[name]})

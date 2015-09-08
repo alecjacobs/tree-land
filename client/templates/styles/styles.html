@@ -1,16 +1,36 @@
 <template name="styles">
   <style>
     body {
-      background-color: {{backgroundColor}};
-      color: lightgrey;
+      background-color: {{themeColors.background}};
+      color: {{themeColors.text}};
     }
 
     a {
-      color: lightgrey;
+      color: {{themeColors.text}};
     }
 
     input {
-      background-color: {{backgroundColor}};
+      background-color: {{themeColors.background}};
+    }
+
+    .story .state-indicator.selected {
+      background-color: {{themeColors.indicators}};
+    }
+
+    .story .state-indicator.editing {
+      background-color: {{themeColors.text}};
+    }
+
+    .story .show-children span {
+      color: {{themeColors.indicators}};
+    }
+
+    .stories-list.show-border {
+      border-color: {{themeColors.indicators}};
+    }
+
+    .keymappings {
+      border-color: {{themeColors.indicators}};
     }
   </style>
 </template>

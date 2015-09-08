@@ -2,13 +2,14 @@
   float: right;
   width: 100%;
   border-right: 0;
-  margin-top: 10px;
+  margin-top: 2px;
   cursor: pointer;
 
   .title {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 6px;
   }
 
   .title-edit {
@@ -16,11 +17,12 @@
   }
 
   .title, .title-edit {
-    font-size: 24px;
+    font-weight: 300;
+    font-size: 18px;
     display: inline-block;
     float: left;
     width: 80%;
-    padding-left: 10px;
+    padding-left: 2px;
   }
 
   .btn-group {
@@ -34,31 +36,22 @@
   }
 
   .state-indicator {
-    height: 44px;
+    height: 32px;
     float: left;
     display: inline-box;
-    width: 10px;
+    width: 8px;
     margin-right: 1px;
-
-    &.editing {
-      background-color: white;
-    }
-
-    &.selected {
-      background-color: grey;
-    }
   }
 
   .show-children {
     display: inline-block;
     float: left;
-    padding-top: 8px;
-    padding-left: 8px;
+    padding-top: 4px;
+    padding-left: 6px;
     width: 26px;
 
     span {
-      font-size: 18px;
-      color: grey;
+      font-size: 16px;
     }
   }
 }

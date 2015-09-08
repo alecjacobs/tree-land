@@ -2,6 +2,19 @@
   margin-bottom: 0;
   border: 0;
 
+  .navbar-header {
+    width: 100%;
+  }
+
+  .spacer {
+    display: inline-block;
+    float: left;
+    width: 2px;
+    height: 30px;
+    margin: 10px 20px;
+    background-color: grey;
+  }
+
   a:hover {
     background-color: lightgrey;
     color: #333;
@@ -9,9 +22,10 @@
 
   .connection-indicator {
     float: left;
-    margin-top: 14px;
-    padding: 0 10px;
-    height: 20px;
+    margin-top: 18px;
+    padding: 6px;
+    border-radius: 50%;
+
 
     &.connected {
       background-color: #65ff70;

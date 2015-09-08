@@ -104,8 +104,9 @@ Schemas.Stories = new SimpleSchema
   secretKey:
     type: String
     optional: true
-  backgroundColor:
-    type: String
+  themeColors:
+    type: Object
+    blackbox: true
     optional: true
 
 Stories.attachSchema(Schemas.Stories)

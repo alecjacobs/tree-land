@@ -5,13 +5,10 @@
         <a class="navbar-brand" href="#">
           TreeLand
         </a>
-        <div class="connection-indicator {{connectionState}}">
-          {{#if meteorStatus.connected}}
-          {{else}}
-            offline
-          {{/if}}
-        </div>
-        {{> colorPicker}}
+        <div class="connection-indicator {{connectionState}}" title="{{connectionState}}"></div>
+        {{> colorPicker name="background"}}
+        {{> colorPicker name="text"}}
+        {{> colorPicker name="indicators"}}
       </div>
     </div>
   </nav>
