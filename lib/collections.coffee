@@ -8,12 +8,16 @@ class root.Story
     @syblingsSelector = {parentId: @parentId}
     @syblingsAboveSelector = _.extend({position: {$gt: @position}}, @syblingsSelector)
     @syblingsBelowSelector = _.extend({position: {$lt: @position}}, @syblingsSelector)
+    @doneChildrenSelector = _.extend({done: true}, @childrenSelector)
 
   parent: ->
     Stories.findOne(@parentId)
 
   children: ->
     Stories.find(@childrenSelector)
+
+  doneChildren: ->
+    Stories.find(@doneChildrenSelector)
 
   hasChildren: ->
     @children().count() > 0

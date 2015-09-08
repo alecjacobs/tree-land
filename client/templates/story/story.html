@@ -7,6 +7,11 @@
       {{/if}}
     </div>
     {{> storyTitle this}}
+    {{#if showCompletionBar}}
+      <div class="completion-indicator-bar">
+        <div class="completion-progress" style="width: {{widthPercentage}}%;"></div>
+      </div>
+    {{/if}}
   </div>
 
   <div class="clearfix"></div>

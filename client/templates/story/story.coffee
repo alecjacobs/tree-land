@@ -44,3 +44,7 @@ Template.story.helpers
       "right"
   showStoriesList: ->
     @showChildren && (Stories.find({parentId: @_id}).count() > 0)
+  showCompletionBar: ->
+    @hasChildren() && @parentId && (@doneChildren().count() > 0)
+  widthPercentage: ->
+    (@doneChildren().count() / @children().count())*100
