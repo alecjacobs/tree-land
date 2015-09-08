@@ -10,6 +10,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 6px;
+
+    &.done {
+      text-decoration: line-through;
+      opacity: 0.25;
+    }
   }
 
   .title-edit {

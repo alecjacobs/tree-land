@@ -108,6 +108,8 @@ Schemas.Stories = new SimpleSchema
     type: Object
     blackbox: true
     optional: true
+  done:
+    type: Boolean
 
 Stories.attachSchema(Schemas.Stories)
 
@@ -118,6 +120,8 @@ Stories.defaults = ->
   editing: false
   position: 0
   showChildren: true
+  themeColors: {}
+  done: false
   secretKey: (if Meteor.isClient then Session.get("storyKey") else null)
 
 Stories.create = (storyData, callback) ->
