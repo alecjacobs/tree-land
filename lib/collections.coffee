@@ -34,10 +34,10 @@ class root.Story
     Stories.find(@syblingsSelector)
 
   syblingsAbove: ->
-    Stories.find(@syblingsAboveSelector)
+    Stories.find(@syblingsAboveSelector, {sort: {position: 1}})
 
   syblingsBelow: ->
-    Stories.find(@syblingsBelowSelector)
+    Stories.find(@syblingsBelowSelector, {sort: {position: -1}})
 
   firstSyblingAbove: ->
     Stories.findOne(@syblingsAboveSelector, {sort: {position: 1}})

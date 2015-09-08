@@ -95,4 +95,25 @@ Template.body.onCreated ->
       else if keyPressed == "esc"
         Session.set("rootLevelStoryId", null)
 
-  Mousetrap.bind(["down","up","left","right","enter","n","e","d","y","h","x","esc"], handleKeypress)
+  Mousetrap.bind(["down", "up", "left", "right", "enter", "n", "e", "d", "y", "h", "x", "esc"], handleKeypress)
+  Mousetrap.bind "shift+up", ->
+    currentStory = Stories.findOne(Session.get("selectedStoryId"))
+    aboveStory = currentStory.firstSyblingAbove()
+
+    if aboveStory
+      currentPosition = aboveStory.position
+      abovePosition = currentStory.position
+
+      Stories.update(currentStory._id, {$set: {position: currentPosition}})
+      Stories.update(aboveStory._id, {$set: {position: abovePosition}})
+
+  Mousetrap.bind "shift+down", ->
+    currentStory = Stories.findOne(Session.get("selectedStoryId"))
+    belowStory = currentStory.firstSyblingBelow()
+
+    if belowStory
+      currentPosition = belowStory.position
+      belowPosition = currentStory.position
+
+      Stories.update(currentStory._id, {$set: {position: currentPosition}})
+      Stories.update(belowStory._id, {$set: {position: belowPosition}})
