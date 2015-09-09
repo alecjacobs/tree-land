@@ -5,6 +5,20 @@
   margin-top: 2px;
   cursor: pointer;
 
+  &.done {
+    .completion-indicator-bar {
+      opacity: 0.5;
+    }
+
+    .show-children {
+      opacity: 0.5;
+    }
+
+    span {
+      opacity: 0.5;
+    }
+  }
+
   .story-counts {
     margin-left: 20px;
   }
@@ -19,6 +33,9 @@
 
     .completion-progress {
       height: 100%;
+      transition-property: width;
+      transition-timing-function: ease;
+      transition-duration: .3s;
     }
   }
 
@@ -32,7 +49,7 @@
 
     &.done {
       text-decoration: line-through;
-      opacity: 0.25;
+      opacity: 0.5;
     }
   }
 

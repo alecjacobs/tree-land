@@ -1,5 +1,5 @@
 <template name="story">
-  <div class="story" data-story-id="{{_id}}">
+  <div class="story {{#if done}} done {{/if}}" data-story-id="{{_id}}">
     <div class="state-indicator {{state}}"></div>
     <div class="show-children">
       {{#if hasChildren}}
@@ -11,7 +11,7 @@
       <div class="completion-indicator-bar">
         <div class="completion-progress" style="width: {{widthPercentage}}%;"></div>
       </div>
-      <span class="story-counts">({{childrenCount}}/{{doneChildrenCount}})</span>
+      <span class="story-counts">({{doneChildrenCount}}/{{childrenCount}})</span>
     {{/if}}
   </div>
 
