@@ -57,7 +57,7 @@ class root.Story
     else if @syblingsBelow().count()
       @firstSyblingBelow()._id
 
-  addStoryBelow: ->
+  addChildBelow: ->
     @expand()
 
     newStoryDoc =
@@ -81,6 +81,22 @@ class root.Story
         if Meteor.isClient
           Session.set("selectedStoryId", result)
           $("[data-story-id='#{result}'] .title-edit").focus().select()
+
+  addSyblingBelow: ->
+    newStoryDoc =
+      title: ""
+      editing: true
+      position: @position
+      parentId: @parentId
+
+    Meteor.call "bumpStoriesAbove", @_id, ->
+      Stories.create newStoryDoc, (error, result) ->
+        if error
+          throw error
+        else
+          if Meteor.isClient
+            Session.set("selectedStoryId", result)
+            $("[data-story-id='#{result}'] .title-edit").focus().select()
 
 root.Stories = new Mongo.Collection "stories",
   transform: (doc) ->

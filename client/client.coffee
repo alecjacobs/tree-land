@@ -84,7 +84,9 @@ Template.body.onCreated ->
       else if keyPressed == "enter"
         $("[data-story-id='#{currentStory._id}']").click()
       else if keyPressed == "n"
-        currentStory.addStoryBelow()
+        currentStory.addSyblingBelow()
+      else if keyPressed == "shift+n"
+        currentStory.addChildBelow()
       else if keyPressed == "e"
         Session.set("rootLevelStoryId", currentStory._id)
       else if keyPressed == "d"
@@ -104,7 +106,7 @@ Template.body.onCreated ->
         if currentStory
           Stories.update(currentStory._id, {$set: {showChildren: !currentStory.showChildren}})
 
-  Mousetrap.bind(["down", "up", "left", "right", "enter", "n", "e", "d", "y", "h", "x", "esc", "tab"], handleKeypress)
+  Mousetrap.bind(["down", "up", "left", "right", "enter", "n", "shift+n", "e", "d", "y", "h", "x", "esc", "tab"], handleKeypress)
 
   Mousetrap.bind "shift+tab", (keyEvent, keyPressed) ->
     keyEvent.preventDefault()
