@@ -90,7 +90,10 @@ Template.body.onCreated ->
       else if keyPressed == "e"
         Session.set("rootLevelStoryId", currentStory._id)
       else if keyPressed == "d"
-        Session.set("pendingDeleteId", currentStory._id)
+        if Stories.topLevelStory()._id == currentStory._id
+          console.log "Cannot delete top level story!"
+        else
+          Session.set("pendingDeleteId", currentStory._id)
       else if keyPressed == "h"
         Session.set("showHelp", !Session.get("showHelp"))
       else if keyPressed == "x"

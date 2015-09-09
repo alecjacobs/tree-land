@@ -50,12 +50,12 @@ class root.Story
     Stories.findOne(@syblingsBelowSelector, {sort: {position: -1}})
 
   storyAboveId: ->
-    if @parentId && !@syblingsAbove().count()
+    if @parentId && !@syblingsAbove().count() && !@syblingsBelow().count()
       @parentId
     else if @syblingsAbove().count()
-      inspectingStory = @firstSyblingAbove()
-      while inspectingStory.showChildren && inspectingStory.lastChild()
-        inspectingStory.lastChild()._id
+      @firstSyblingAbove()._id
+    else if @syblingsBelow().count()
+      @firstSyblingBelow()._id
 
   addStoryBelow: ->
     @expand()
