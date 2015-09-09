@@ -91,7 +91,7 @@ root.Schemas = {}
 Schemas.Stories = new SimpleSchema
   title:
     type: String
-    max: 140
+    max: 1776
     optional: true
   parentId:
     type: String

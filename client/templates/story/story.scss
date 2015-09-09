@@ -27,6 +27,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 6px;
+    max-width: 80%;
+    min-width: 200px;
 
     &.done {
       text-decoration: line-through;
@@ -36,6 +38,7 @@
 
   .title-edit {
     border: 0;
+    width: 80%;
   }
 
   .title, .title-edit {
@@ -43,8 +46,7 @@
     font-size: 18px;
     display: inline-block;
     float: left;
-    max-width: 80%;
-    min-width: 200px;
+
     padding-left: 2px;
   }
 
