@@ -1,6 +1,29 @@
 Meteor.publish "stories", (secretKey) ->
   Stories.find({secretKey: secretKey})
 
+storiesToMarkdown = (topLevelStory) ->
+  responseBody = ""
+  responseBody += topLevelStory.title
+  responseBody += "\n"
+  _.times topLevelStory.title.length, ->
+    responseBody += "="
+  responseBody += "\n\n"
+
+  renderChildren = (inspectingStory) ->
+    _.each inspectingStory.children().fetch(), (currentChild) ->
+      indent = ""
+      depth = storyDepth(currentChild._id)
+      _.times depth, ->
+        indent += "  "
+      responseBody += "#{indent}* #{currentChild.title} \n"
+
+      if currentChild.children().count()
+        renderChildren(currentChild)
+
+  renderChildren(topLevelStory)
+  responseBody
+
+
 Api = new Restivus
   prettyJson: false
   apiPath: "export/"
@@ -15,7 +38,7 @@ Api.addRoute ':secretKey',
       headers:
         "Content-Type": "text/markdown"
         "Content-Disposition": "attachment; filename=#{topStory.title}.md"
-      body: "this is the body!"
+      body: storiesToMarkdown(topStory)
     else
       statusCode: 404
       headers:

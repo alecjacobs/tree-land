@@ -1,10 +1,3 @@
-window.storyDepth = (id) ->
-  parentId = Stories.findOne(id)?.parentId
-  if parentId == null
-    0
-  else
-    1 + storyDepth(parentId)
-
 Template.story.events
   "click .story": (e, tmpl) ->
     Session.set("selectedStoryId", @_id)

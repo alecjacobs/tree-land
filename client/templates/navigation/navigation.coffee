@@ -5,4 +5,4 @@ Template.navigation.helpers
     else
       "offline"
   exportLink: ->
-    Meteor.absoluteUrl("/export/#{Session.get("storyKey")}.md")
+    Meteor.absoluteUrl("export/#{Session.get("storyKey")}.md")
