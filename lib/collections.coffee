@@ -135,3 +135,16 @@ Stories.create = (storyData, callback) ->
 Stories.topLevelStory = ->
   if Meteor.isClient
     @findOne(Session.get("rootLevelStoryId") || {parentId: null})
+
+Stories.allow
+  insert: (userId, doc) ->
+    true
+
+  update: (userId, doc, fieldNames, modifier) ->
+    protectedFields = ["secretKey"]
+    _.intersection(fieldNames, protectedFields).length == 0
+
+  remove: (userId, doc) ->
+    true
+
+  fetch: []
