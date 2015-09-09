@@ -1,6 +1,27 @@
 Meteor.publish "stories", (secretKey) ->
   Stories.find({secretKey: secretKey})
 
+Api = new Restivus
+  prettyJson: false
+  apiPath: "export/"
+
+Api.addRoute ':secretKey',
+  get: ->
+    secretKey = @urlParams.secretKey.replace(".md", "")
+    topStory = Stories.findOne({secretKey: secretKey, parentId: null})
+
+    if topStory
+      statusCode: 200
+      headers:
+        "Content-Type": "text/markdown"
+        "Content-Disposition": "attachment; filename=#{topStory.title}.md"
+      body: "this is the body!"
+    else
+      statusCode: 404
+      headers:
+        "Content-Type": "text"
+      body: "404 - Nothing found!"
+
 Meteor.methods
   newWorkspace: ->
     secretKey = Random.secret()

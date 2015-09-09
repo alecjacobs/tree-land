@@ -2,6 +2,10 @@
   margin-bottom: 0;
   border: 0;
 
+  .treeland-text.navbar-brand {
+    margin-left: 0;
+  }
+
   .navbar-header {
     width: 100%;
   }
@@ -31,6 +35,17 @@
 
     &.offline {
       color: #FF6565;
+    }
+  }
+
+  .markdown-export {
+    float: right;
+    margin-top: 14px;
+    margin-right: 10px;
+    padding: 0 4px;
+
+    &:hover {
+      text-decoration: none;
     }
   }
 }

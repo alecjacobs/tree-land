@@ -1,3 +1,3 @@
 Template.keymappings.helpers
   showHelp: ->
-    !Stories.topLevelStory().hideHelp
+    !Stories.topLevelStory()?.hideHelp
