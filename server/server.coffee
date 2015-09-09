@@ -15,7 +15,11 @@ storiesToMarkdown = (topLevelStory) ->
       depth = storyDepth(currentChild._id)
       _.times depth, ->
         indent += "  "
-      responseBody += "#{indent}* #{currentChild.title} \n"
+
+      if currentChild.done
+        responseBody += "#{indent}* ~~#{currentChild.title}~~\n"
+      else
+        responseBody += "#{indent}* #{currentChild.title} \n"
 
       if currentChild.children().count()
         renderChildren(currentChild)
