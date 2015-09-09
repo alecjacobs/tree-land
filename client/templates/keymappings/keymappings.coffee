@@ -1,3 +1,3 @@
 Template.keymappings.helpers
   showHelp: ->
-    Session.get("showHelp")
+    !Stories.topLevelStory().hideHelp

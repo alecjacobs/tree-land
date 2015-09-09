@@ -3,8 +3,6 @@ root = window
 Tracker.autorun ->
   document.title = Stories.topLevelStory()?.title || "TreeLand"
 
-Session.setDefault("showHelp", true)
-
 root.serializeForm = (formElement) ->
   formData = {}
   $(formElement).serializeArray().map (inputObject) ->
@@ -95,7 +93,8 @@ Template.body.onCreated ->
         else
           Session.set("pendingDeleteId", currentStory._id)
       else if keyPressed == "h"
-        Session.set("showHelp", !Session.get("showHelp"))
+        topLevelStory = Stories.topLevelStory()
+        Stories.update(topLevelStory._id, {$set: {hideHelp: !topLevelStory.hideHelp}})
       else if keyPressed == "x"
         Stories.update(currentStory._id, {$set: {done: !currentStory.done}})
       else if keyPressed == "esc"

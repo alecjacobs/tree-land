@@ -114,6 +114,9 @@ Schemas.Stories = new SimpleSchema
     optional: true
   done:
     type: Boolean
+  hideHelp:
+    type: Boolean
+    optional: true
 
 Stories.attachSchema(Schemas.Stories)
 
