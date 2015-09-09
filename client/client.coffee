@@ -85,7 +85,10 @@ Template.body.onCreated ->
         $("[data-story-id='#{currentStory._id}']").click()
         GAnalytics.event("editStory")
       else if keyPressed == "n"
-        currentStory.addSyblingBelow()
+        if currentStory.parentId
+          currentStory.addSyblingBelow()
+        else
+          currentStory.addChildBelow()
         GAnalytics.event("newStory","syblingBelow")
       else if keyPressed == "shift+n"
         currentStory.addChildBelow()
