@@ -117,6 +117,14 @@ Template.body.onCreated ->
     if topLevelStory.showChildren then Session.set("selectedStoryId", topLevelStory._id)
     Meteor.call("toggleAllVisibility", topLevelStory._id)
 
+  Mousetrap.bind "shift+left", ->
+    currentStory = Stories.findOne(Session.get("selectedStoryId"))
+    currentStory.promote()
+
+  Mousetrap.bind "shift+right", ->
+    currentStory = Stories.findOne(Session.get("selectedStoryId"))
+    currentStory.demote()
+
   Mousetrap.bind "shift+up", ->
     currentStory = Stories.findOne(Session.get("selectedStoryId"))
     aboveStory = currentStory.firstSyblingAbove()

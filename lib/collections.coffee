@@ -98,6 +98,25 @@ class root.Story
             Session.set("selectedStoryId", result)
             $("[data-story-id='#{result}'] .title-edit").focus().select()
 
+  promote: ->
+    parent = Stories.findOne(@parentId)
+    if parent.parentId
+      Meteor.call "bumpStoriesAbove", @parentId, =>
+        Stories.update(@_id, {$set: {position: parent.position, parentId: parent.parentId}})
+
+  demote: ->
+    sybAbove = @firstSyblingAbove()
+    if sybAbove
+      if sybAbove.children().count()
+        sybAbove.expand()
+        newPosition = sybAbove.firstChild().position + 1
+        Stories.update(@_id, {$set: {parentId: sybAbove._id, position: newPosition}})
+      else
+        sybAbove.expand()
+        Stories.update @_id, {$set: {parentId: sybAbove._id, position: Stories.defaults.position}}, ->
+          sybAbove.expand()
+
+
 root.Stories = new Mongo.Collection "stories",
   transform: (doc) ->
     new Story(doc)
