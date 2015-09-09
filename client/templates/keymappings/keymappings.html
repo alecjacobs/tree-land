@@ -1,28 +1,37 @@
 <template name="keymappings">
   {{#if showHelp}}
-    <div class="keymappings">
-      <span><span class="glyphicon glyphicon-arrow-left"></span> collapse</span>
-      <span><span class="glyphicon glyphicon-arrow-up"></span> up</span>
-      <span><span class="glyphicon glyphicon-arrow-down"></span> down</span>
-      <span><span class="glyphicon glyphicon-arrow-right"></span> expand</span>
-      <div class="clearfix"></div>
-      <span>
-        shift +
-        <span class="glyphicon glyphicon-arrow-up"></span>
-        <span class="glyphicon glyphicon-arrow-down"></span> - move story
-      </span>
-      <div class="clearfix"></div>
-      <span>enter - edit</span>
-      <div class="clearfix"></div>
-      <span>tab - toggle children</span>
-      <div class="clearfix"></div>
-      <span>n - new</span>
-      <div class="clearfix"></div>
-      <span>x - toggle done</span>
-      <div class="clearfix"></div>
-      <span>d - delete</span>
-      <div class="clearfix"></div>
-      <span>h - toggle help</span>
+    <div class="keymappings container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="clearfix"></div>
+          <span>enter - edit/save</span>
+          <div class="clearfix"></div>
+          <span>tab - toggle children</span>
+          <div class="clearfix"></div>
+          <span>shift + tab - toggle all children</span>
+          <div class="clearfix"></div>
+          <span>n - new</span>
+          <div class="clearfix"></div>
+          <span>x - toggle done</span>
+          <div class="clearfix"></div>
+          <span>d - delete</span>
+          <div class="clearfix"></div>
+          <span>h - toggle help</span>
+        </div>
+
+        <div class="col-md-4">
+          <span><span class="glyphicon glyphicon-arrow-left"></span> collapse</span>
+          <span><span class="glyphicon glyphicon-arrow-up"></span> up</span>
+          <span><span class="glyphicon glyphicon-arrow-down"></span> down</span>
+          <span><span class="glyphicon glyphicon-arrow-right"></span> expand</span>
+        </div>
+
+        <div class="col-md-4">
+          shift +
+          <span class="glyphicon glyphicon-arrow-up"></span>
+          <span class="glyphicon glyphicon-arrow-down"></span> - move story
+        </div>
+      </div>
     </div>
   {{/if}}
 </template>

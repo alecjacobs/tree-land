@@ -96,12 +96,16 @@ Template.body.onCreated ->
         Session.set("rootLevelStoryId", null)
       else if keyPressed == "tab"
         keyEvent.preventDefault()
-        console.log "tab being pressed"
         if currentStory
           Stories.update(currentStory._id, {$set: {showChildren: !currentStory.showChildren}})
 
-
   Mousetrap.bind(["down", "up", "left", "right", "enter", "n", "e", "d", "y", "h", "x", "esc", "tab"], handleKeypress)
+
+  Mousetrap.bind "shift+tab", (keyEvent, keyPressed) ->
+    keyEvent.preventDefault()
+    topLevelStory = Stories.topLevelStory()
+    if topLevelStory.showChildren then Session.set("selectedStoryId", topLevelStory._id)
+    Meteor.call("toggleAllVisibility", topLevelStory._id)
 
   Mousetrap.bind "shift+up", ->
     currentStory = Stories.findOne(Session.get("selectedStoryId"))

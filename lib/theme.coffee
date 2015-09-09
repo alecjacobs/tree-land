@@ -5,7 +5,7 @@ root.Theme = {}
 Theme.defaultValues =
   background: "#333"
   text: "lightgrey"
-  indicators: "grey"
+  indicators: "#438acc"
 
 Theme.colorValues = ->
   if Meteor.isClient
