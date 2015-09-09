@@ -1,5 +1,8 @@
 root = window
 
+Tracker.autorun ->
+  document.title = Stories.topLevelStory()?.title || "TreeLand"
+
 Session.setDefault("showHelp", true)
 
 root.serializeForm = (formElement) ->
