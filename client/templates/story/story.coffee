@@ -4,6 +4,7 @@ Template.story.events
     if ! @editing
       Stories.update @_id, {$set: {editing: true}}, ->
         $(tmpl.find(".title-edit")).focus().select()
+        GAnalytics.event("editStory")
   "blur .story": (e, tmpl) ->
     if @editing
       formData = serializeForm(tmpl.find("#storyUpdateForm"))

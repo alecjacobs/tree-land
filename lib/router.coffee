@@ -3,6 +3,7 @@ FlowRouter.route '/:storyKey',
       if Meteor.isClient
         Session.set("collectionsLoaded", false)
         Session.set("storyKey", params.storyKey)
+        GAnalytics.pageview("/#{params.storyKey}")
         Meteor.subscribe "stories", params.storyKey, ->
           Session.set("collectionsLoaded", true)
           Session.setDefault("selectedStoryId", Stories.findOne(parentId: null)?._id)

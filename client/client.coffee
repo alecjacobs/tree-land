@@ -83,10 +83,13 @@ Template.body.onCreated ->
         moveRight(currentStory)
       else if keyPressed == "enter"
         $("[data-story-id='#{currentStory._id}']").click()
+        GAnalytics.event("editStory")
       else if keyPressed == "n"
         currentStory.addSyblingBelow()
+        GAnalytics.event("newStory","syblingBelow")
       else if keyPressed == "shift+n"
         currentStory.addChildBelow()
+        GAnalytics.event("newStory","childBelow")
       else if keyPressed == "e"
         Session.set("rootLevelStoryId", currentStory._id)
       else if keyPressed == "d"
