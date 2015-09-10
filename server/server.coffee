@@ -64,16 +64,14 @@ Meteor.methods
                   Stories.create({title: "goes", secretKey: secretKey, showChildren: false, parentId: result})
 
       Stories.create({title: "You can also export the whole tree as a markdown document", secretKey: secretKey, parentId: result, position: 4})
-      Stories.create {title: "Use the arrow keys to navigate", secretKey: secretKey, parentId: result, position: 3}, (error, result) ->
-        Stories.create({title: "hold the shift key to move a story around", secretKey: secretKey, parentId: result, position: 3})
-        Stories.create({title: "press enter to start editing a story", secretKey: secretKey, parentId: result, position: 2})
-        Stories.create({title: "'n' adds a story", secretKey: secretKey, parentId: result, position: 2})
-        Stories.create({title: "'x' toggles a story being done or not", secretKey: secretKey, parentId: result, position: 1})
+      Stories.create {title: "Navigation (use arrow keys)", secretKey: secretKey, parentId: result, position: 3}, (error, result) ->
+        Stories.create({title: "'enter' starts editing/saves a story", secretKey: secretKey, parentId: result, position: 4})
+        Stories.create({title: "'n' adds a story", secretKey: secretKey, parentId: result, position: 3})
+        Stories.create({title: "'x' toggles a story being done or not", secretKey: secretKey, parentId: result, position: 2})
+        Stories.create({title: "hold the shift key to move a story around", secretKey: secretKey, parentId: result, position: 1})
         Stories.create({title: "See the cheatsheet below for all commands", secretKey: secretKey, parentId: result, position: 0})
-      Stories.create({title: "This is a work in progress, so please excuse any bugs / funkyness", secretKey: secretKey, parentId: result, position: 2})
-      Stories.create({title: "You can customize the colors of this tree", secretKey: secretKey, parentId: result, position: 1})
+      Stories.create({title: "You can customize the colors of this tree", secretKey: secretKey, parentId: result, position: 2})
+      Stories.create({title: "This is a work in progress, so please excuse any bugs / funkyness", secretKey: secretKey, parentId: result, position: 1})
       Stories.create({title: "To learn more: https://gist.github.com/alecjacobs/a259ce5d0f698773522c", secretKey: secretKey, parentId: result, position: 0})
-
-
 
     secretKey
