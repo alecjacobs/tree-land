@@ -10,11 +10,12 @@
           TreeLand
         </a>
 
-
-        {{> colorPicker name="background"}}
-        {{> colorPicker name="text"}}
-        {{> colorPicker name="indicators"}}
-        <a class="markdown-export" href="{{exportLink}}" target="_blank">export</a>
+        {{#if topLevelStory}}
+          {{> colorPicker name="background"}}
+          {{> colorPicker name="text"}}
+          {{> colorPicker name="indicators"}}
+          <a class="markdown-export" href="{{exportLink}}" target="_blank">export</a>
+        {{/if}}
       </div>
     </div>
   </nav>

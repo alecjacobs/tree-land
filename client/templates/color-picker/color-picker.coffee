@@ -15,5 +15,5 @@ Template.colorPicker.onRendered ->
   name = @data.name
 
   Tracker.autorun ->
-    if Session.get("collectionsLoaded")
+    if !Session.get("collectionsLoading")
       $pickerElement.colorpicker({color: Theme.colorValues()[name]})

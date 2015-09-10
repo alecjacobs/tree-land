@@ -1,14 +1,16 @@
 FlowRouter.route '/:storyKey',
     action: (params, queryParams) ->
       if Meteor.isClient
-        Session.set("collectionsLoaded", false)
+        Session.set("collectionsLoading", true)
+        console.log params.storyKey
+        console.log
         Session.set("storyKey", params.storyKey)
         GAnalytics.pageview("/#{params.storyKey}")
-        Meteor.subscribe "stories", params.storyKey, ->
-          Session.set("collectionsLoaded", true)
-          Session.setDefault("selectedStoryId", Stories.findOne(parentId: null)?._id)
+        Tracker.autorun ->
+          Meteor.subscribe "stories", Session.get("storyKey"), ->
+            Session.set("collectionsLoading", false)
+            Session.setDefault("selectedStoryId", Stories.findOne(parentId: null)?._id)
 
 FlowRouter.route '/',
-  action: ->
-    Meteor.call "newWorkspace", (error, result) ->
-      FlowRouter.go("/#{result}")
+  action: (params, queryParams) ->
+    Session.set("storyKey", null)

@@ -1,5 +1,7 @@
 root = window
 
+Session.setDefault("collectionsLoading")
+
 Tracker.autorun ->
   document.title = Stories.topLevelStory()?.title || "TreeLand"
 
@@ -13,11 +15,18 @@ Template.registerHelper "meteorStatus", ->
   Meteor.status()
 
 Template.registerHelper "collectionsLoaded", ->
-  Session.get("collectionsLoaded")
+  !Session.get("collectionsLoading")
 
 Template.application.helpers
   topLevelStory: ->
     Stories.topLevelStory()
+
+Template.body.events
+  "click .new-tree-button": (e, tmpl) ->
+    e.preventDefault()
+    Meteor.call "newWorkspace", (error, result) ->
+      FlowRouter.go("/#{result}")
+
 
 Template.body.onCreated ->
   moveUp = (currentStory) ->
@@ -149,6 +158,3 @@ Template.body.onCreated ->
 
       Stories.update(currentStory._id, {$set: {position: currentPosition}})
       Stories.update(belowStory._id, {$set: {position: belowPosition}})
-
-  Mousetrap.bind "back", ->
-    window.history.go(-2)

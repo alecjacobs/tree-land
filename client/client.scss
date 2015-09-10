@@ -9,3 +9,22 @@
 .application {
   margin-bottom: 128px;
 }
+
+.new-tree-button {
+  font-size: 72px;
+  width: 400px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  border: 8px solid lightgrey;
+
+  &:hover {
+    text-decoration: none;
+    color: #65ff70;
+    border: 8px solid #65ff70;
+  }
+
+  &:visited {
+    text-decoration: none;
+  }
+}

@@ -15,14 +15,16 @@
       {{#if topLevelStory}}
         {{> story topLevelStory}}
       {{else}}
-        <h1 class="global-notification">Nothing here</h1>
+        <a class="new-tree-button" href="#">New Tree <div class="clearfix"></div><span class="glyphicon glyphicon-tree-conifer"></span></a>
       {{/if}}
     {{else}}
       <h1 class="global-notification">Loading...</h1>
     {{/if}}
   </div>
   <footer>
-    {{> keymappings}}
+    {{#if topLevelStory}}
+      {{> keymappings}}
+    {{/if}}
   </footer>
 </template>
 
