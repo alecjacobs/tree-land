@@ -149,3 +149,6 @@ Template.body.onCreated ->
 
       Stories.update(currentStory._id, {$set: {position: currentPosition}})
       Stories.update(belowStory._id, {$set: {position: belowPosition}})
+
+  Mousetrap.bind "back", ->
+    window.history.go(-2)
