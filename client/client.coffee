@@ -17,9 +17,8 @@ Template.registerHelper "meteorStatus", ->
 Template.registerHelper "collectionsLoaded", ->
   !Session.get("collectionsLoading")
 
-Template.application.helpers
-  topLevelStory: ->
-    Stories.topLevelStory()
+Template.registerHelper "topLevelStory", ->
+  Stories.topLevelStory()
 
 Template.body.events
   "click .new-tree-button": (e, tmpl) ->
