@@ -113,6 +113,8 @@ Template.body.onCreated ->
         Stories.update(topLevelStory._id, {$set: {hideHelp: !topLevelStory.hideHelp}})
       else if keyPressed == "x"
         Stories.update(currentStory._id, {$set: {done: !currentStory.done}})
+      else if keyPressed == "l"
+        Stories.update(currentStory._id, {$set: {eval: !currentStory.eval}})
       else if keyPressed == "esc"
         Session.set("rootLevelStoryId", null)
       else if keyPressed == "tab"
@@ -120,7 +122,7 @@ Template.body.onCreated ->
         if currentStory
           Stories.update(currentStory._id, {$set: {showChildren: !currentStory.showChildren}})
 
-  Mousetrap.bind(["down", "up", "left", "right", "enter", "n", "shift+n", "e", "d", "y", "h", "x", "esc", "tab"], handleKeypress)
+  Mousetrap.bind(["down", "up", "left", "right", "enter", "n", "shift+n", "e", "d", "y", "h", "x", "l","esc", "tab"], handleKeypress)
 
   Mousetrap.bind "shift+tab", (keyEvent, keyPressed) ->
     keyEvent.preventDefault()

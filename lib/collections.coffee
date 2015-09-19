@@ -152,6 +152,8 @@ Schemas.Stories = new SimpleSchema
   hideHelp:
     type: Boolean
     optional: true
+  eval:
+    type: Boolean
 
 Stories.attachSchema(Schemas.Stories)
 
@@ -164,6 +166,7 @@ Stories.defaults = ->
   showChildren: true
   themeColors: {}
   done: false
+  eval: false
   secretKey: (if Meteor.isClient then Session.get("storyKey") else null)
 
 Stories.create = (storyData, callback) ->

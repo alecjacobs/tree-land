@@ -14,7 +14,11 @@
     {{#if aboutToDelete}}
       <p class="title pending-delete">Delete? yes (y) no (n)</p>
     {{else}}
-      <p class="title {{#if done}}done{{/if}}">{{title}}</p>
+      {{#if eval}}
+        <p class="title">{{treEval title}}</p>
+      {{else}}
+        <p class="title {{#if done}}done{{/if}}">{{title}}</p>
+      {{/if}}
     {{/if}}
   {{/if}}
 </template>
