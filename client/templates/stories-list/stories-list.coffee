@@ -11,5 +11,4 @@ Template.storiesList.helpers
     else
       100 - (80 * (depthLevel / maximumDepth))
   showBorder: ->
-    # @grandparentId
-    (@parentId == Session.get("selectedStoryId"))
+    @parentId == Session.get("selectedStoryId")
