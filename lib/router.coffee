@@ -12,3 +12,4 @@ FlowRouter.route '/:storyKey',
 FlowRouter.route '/',
   action: (params, queryParams) ->
     Session.set("storyKey", null)
+    GAnalytics.pageview("/")
