@@ -14,7 +14,7 @@ Meteor.methods
         Stories.create({title: "'x' toggles a story being done or not", secretKey: secretKey, parentId: result, position: 2})
         Stories.create({title: "hold the shift key to move a story around", secretKey: secretKey, parentId: result, position: 1})
         Stories.create({title: "See the cheatsheet below for all commands", secretKey: secretKey, parentId: result, position: 0})
-      Stories.create {title: "Infinetly nest things", secretKey: secretKey, parentId: result, showChildren: false, showChildren: false, position: 2}, (error, result) ->
+      Stories.create {title: "Infinetly nest things", secretKey: secretKey, parentId: result, showChildren: false, showChildren: false, position: 3}, (error, result) ->
         Stories.create {title: "let's", secretKey: secretKey, showChildren: false, parentId: result}, (error, result) ->
           Stories.create {title: "just", secretKey: secretKey, showChildren: false, parentId: result}, (error, result) ->
             Stories.create {title: "see", secretKey: secretKey, showChildren: false, parentId: result}, (error, result) ->
