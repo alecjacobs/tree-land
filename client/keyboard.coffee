@@ -11,7 +11,7 @@ possiblyClearDeleteId = ->
 
 setupBinding = (boundKey, callback) ->
   Mousetrap.bind boundKey, (keyEvent, keyPressed) ->
-    possiblyClearDeleteId()
+    possiblyClearDeleteId() unless keyPressed == "y"
     callback(getCurrentStory(), keyEvent)
     if keyPressed.indexOf("tab") > -1
       keyEvent.preventDefault()
