@@ -1,5 +1,7 @@
 root = window
 
+root.StoryClock = new ReactiveClock("storyClock")
+
 Session.setDefault("collectionsLoading")
 
 Tracker.autorun ->

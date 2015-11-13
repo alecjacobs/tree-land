@@ -3,3 +3,7 @@ Template.application.events
     e.preventDefault()
     Meteor.call "newWorkspace", (error, result) ->
       FlowRouter.go("/#{result}")
+
+Template.application.helpers
+  timer: ->
+    StoryClock.elapsedTime()
