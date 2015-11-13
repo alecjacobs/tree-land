@@ -16,18 +16,28 @@ setupBinding = (boundKey, callback) ->
     if keyPressed.indexOf("tab") > -1
       keyEvent.preventDefault()
 
-setupBinding "up", ((currentStory) -> Navigation.moveUp(currentStory))
-setupBinding "down", ((currentStory) -> Navigation.moveDown(currentStory))
-setupBinding "left", ((currentStory) -> Navigation.moveLeft(currentStory))
-setupBinding "right", ((currentStory) -> Navigation.moveRight(currentStory))
+setupBinding "up",
+  (currentStory) -> Navigation.moveUp(currentStory)
+setupBinding "down",
+  (currentStory) -> Navigation.moveDown(currentStory)
+setupBinding "left",
+  (currentStory) -> Navigation.moveLeft(currentStory)
+setupBinding "right",
+  (currentStory) -> Navigation.moveRight(currentStory)
 
-setupBinding "enter", ((currentStory) -> $("[data-story-id='#{currentStory._id}']").click())
-setupBinding "esc", ((currentStory) -> Session.set("rootLevelStoryId", null))
+setupBinding "enter",
+  (currentStory) -> $("[data-story-id='#{currentStory._id}']").click()
+setupBinding "esc",
+  (currentStory) -> Session.set("rootLevelStoryId", null)
 
-setupBinding "l", ((currentStory) -> Stories.update(currentStory._id, {$set: {eval: !currentStory.eval}}))
-setupBinding "x", ((currentStory) -> Stories.update(currentStory._id, {$set: {done: !currentStory.done}}))
-setupBinding "h", ((currentStory) -> Stories.update(Stories.topLevelStory()._id, {$set: {hideHelp: !Stories.topLevelStory().hideHelp}}))
-setupBinding "e", ((currentStory) -> Session.set("rootLevelStoryId", currentStory._id))
+setupBinding "l",
+  (currentStory) -> Stories.update(currentStory._id, {$set: {eval: !currentStory.eval}})
+setupBinding "x",
+  (currentStory) -> Stories.update(currentStory._id, {$set: {done: !currentStory.done}})
+setupBinding "h",
+  (currentStory) -> Stories.update(Stories.topLevelStory()._id, {$set: {hideHelp: !Stories.topLevelStory().hideHelp}})
+setupBinding "e",
+  (currentStory) -> Session.set("rootLevelStoryId", currentStory._id)
 
 setupBinding "tab", (currentStory, keyEvent) ->
   Stories.update(currentStory._id, {$set: {showChildren: !currentStory.showChildren}})
