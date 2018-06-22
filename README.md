@@ -1,4 +1,4 @@
 # TreeLand
-an infinitely nesting organizer/outliner
+an infinitely nesting task and note organizer/outliner
 
 for task management, project management, life management
